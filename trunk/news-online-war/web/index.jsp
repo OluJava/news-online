@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : index
     Created on : Apr 1, 2013, 9:17:42 AM
     Author     : Khatmau_sr
@@ -20,12 +20,6 @@
                 font-family:Arial, Verdana, sans-serif;
                 font-size:13px;
                 line-height:1.5em
-            }
-            @font-face {
-                font-family: 'Francois One';
-                font-style: normal;
-                font-weight: 400;
-                src: local('Francois One Regular'), local('FrancoisOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/francoisone/v6/bYbkq2nU2TSx4SwFbz5sCHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
             }
             #outer-wrapper{
                 width:950px;
@@ -136,7 +130,7 @@
             #menu li:hover, #menu li.sfhover{
                 position:static
             }
-        </style>    
+        </style>
     </head>
     <body>
         <div id="outer-wrapper">
@@ -168,7 +162,7 @@
                 <div id="right">
                         Bên trái
                 </div>
-            </div>  
+            </div>
             <div id="footer">
                 <div class="credit">
                 © 2013 News Online. Design by <strong>Group 1</strong>
