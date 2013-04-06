@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package web.Entity;
+package web.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -150,7 +150,7 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "web.Entity.Comment[commentId=" + commentId + "]";
+        return "web.entity.Comment[commentId=" + commentId + "]";
     }
 
 }

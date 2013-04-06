@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package web.Entity;
+package web.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -25,7 +25,8 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
     @NamedQuery(name = "Message.findByMessageID", query = "SELECT m FROM Message m WHERE m.messageID = :messageID"),
-    @NamedQuery(name = "Message.findByMessage", query = "SELECT m FROM Message m WHERE m.message = :message")})
+    @NamedQuery(name = "Message.findByMessage", query = "SELECT m FROM Message m WHERE m.message = :message"),
+    @NamedQuery(name = "Message.findByStatus", query = "SELECT m FROM Message m WHERE m.status = :status")})
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,6 +35,8 @@ public class Message implements Serializable {
     private Integer messageID;
     @Column(name = "Message")
     private String message;
+    @Column(name = "Status")
+    private Boolean status;
     @JoinColumn(name = "From", referencedColumnName = "UserId")
     @ManyToOne
     private User user;
@@ -62,6 +65,14 @@ public class Message implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public User getUser() {
@@ -102,7 +113,7 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return "web.Entity.Message[messageID=" + messageID + "]";
+        return "web.entity.Message[messageID=" + messageID + "]";
     }
 
 }

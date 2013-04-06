@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package web.Entity;
+package web.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -114,7 +114,7 @@ public class SubSection implements Serializable {
 
     @Override
     public String toString() {
-        return "web.Entity.SubSection[subSectionId=" + subSectionId + "]";
+        return "web.entity.SubSection[subSectionId=" + subSectionId + "]";
     }
 
 }
