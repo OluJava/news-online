@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package web.Entity;
+package web.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -101,7 +101,7 @@ public class Image implements Serializable {
 
     @Override
     public String toString() {
-        return "web.Entity.Image[imageId=" + imageId + "]";
+        return "web.entity.Image[imageId=" + imageId + "]";
     }
 
 }

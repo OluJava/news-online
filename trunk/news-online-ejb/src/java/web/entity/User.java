@@ -3,18 +3,20 @@
  * and open the template in the editor.
  */
 
-package web.Entity;
+package web.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -77,6 +79,8 @@ public class User implements Serializable {
     private Collection<Comment> commentCollection;
     @OneToMany(mappedBy = "user")
     private Collection<News> newsCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private BlockMessageUser blockMessageUser;
 
     public User() {
     }
@@ -213,6 +217,14 @@ public class User implements Serializable {
         this.newsCollection = newsCollection;
     }
 
+    public BlockMessageUser getBlockMessageUser() {
+        return blockMessageUser;
+    }
+
+    public void setBlockMessageUser(BlockMessageUser blockMessageUser) {
+        this.blockMessageUser = blockMessageUser;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -235,7 +247,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "web.Entity.User[userId=" + userId + "]";
+        return "web.entity.User[userId=" + userId + "]";
     }
 
 }
