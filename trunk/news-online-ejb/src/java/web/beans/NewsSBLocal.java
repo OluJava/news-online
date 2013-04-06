@@ -7,7 +7,7 @@ package web.beans;
 
 import java.util.List;
 import javax.ejb.Local;
-import web.Entity.News;
+import web.entity.News;
 
 /**
  *

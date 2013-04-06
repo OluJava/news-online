@@ -14,7 +14,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import web.Entity.News;
+import web.entity.News;
 
 /**
  *
@@ -76,5 +76,5 @@ public class NewsSB implements NewsSBLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
- 
+
 }
