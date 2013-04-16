@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import web.entity.Category;
 
 /**
@@ -24,9 +25,14 @@ public class CategorySB implements CategorySBLocal {
 	em.persist(object);
     }
 
-    public List<Category> getCategoryHome() {
-	
-	return null;
+    public List<Category> getParentCategories() {
+	return em.createQuery("SELECT c FROM Category c WHERE c.parent = 'None'").getResultList();
+    }
+
+    public List<Category> getSubCateogries(int parentCategoryId) {
+	Query q = em.createNamedQuery("Category.findByParent");
+	q.setParameter("status", parentCategoryId);
+	return q.getResultList();
     }
     
     // Add business logic below. (Right-click in editor and choose

@@ -16,6 +16,8 @@ import web.entity.Category;
 @Local
 public interface CategorySBLocal {
 
-    List<Category> getCategoryHome();
+    List<Category> getParentCategories();
+
+    List<Category> getSubCateogries(int parentCategoryId);
     
 }
