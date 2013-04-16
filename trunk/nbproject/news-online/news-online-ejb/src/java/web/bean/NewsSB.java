@@ -32,7 +32,7 @@ public class NewsSB implements NewsSBLocal {
     }
 
     public List<News> getNewsToDay() {
-	return em.createQuery("SELECT n FROM News n WHERE n.postedDate = GETDATE()").getResultList();
+	return em.createQuery("SELECT n FROM News n WHERE CAST(n.postedDate AS DATE) = CAST(GETDATE() AS DATE)").getResultList();
     }
 
     public void insert(News news) {
