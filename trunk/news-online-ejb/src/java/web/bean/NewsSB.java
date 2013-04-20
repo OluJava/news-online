@@ -29,8 +29,9 @@ public class NewsSB implements NewsSBLocal {
     }
 
     public List<News> getHeadLines() {
-	Query q = em.createQuery("SELECT n FROM News n WHERE n.postedDate = :postedDate");
+	Query q = em.createQuery("SELECT n FROM News n WHERE n.postedDate = :postedDate AND n.status = :status");
 	q.setParameter("postedDate", Calendar.getInstance(), TemporalType.DATE);
+	q.setParameter("status", true);
 	return q.getResultList();
     }
 
@@ -38,6 +39,28 @@ public class NewsSB implements NewsSBLocal {
 	Query q = em.createNamedQuery("News.findByNewsId");
 	q.setParameter("newsId", newsId);
 	return (News)q.getResultList().get(0);
+    }
+
+    public List<News> getPopularNews() {
+	Query q = em.createQuery("SELECT n FROM News n WHERE n.postedDate > :postedDate AND n.status = :status ORDER BY n.viewed DESC");
+	Calendar c = Calendar.getInstance();
+	c.add(Calendar.DATE, -10);
+	q.setParameter("postedDate", c, TemporalType.DATE);
+	q.setParameter("status", true);
+	return q.getResultList();
+    }
+
+    public List<News> getRecentNews() {
+	Query q = em.createQuery("SELECT n FROM News n WHERE n.status = :status ORDER BY n.postedDate DESC");
+	q.setParameter("status", true);
+	return q.getResultList();
+    }
+
+    public List<News> getNewsByTitle(String title) {
+	Query q = em.createQuery("SELECT n FROM News n WHERE n.status = :status AND n.title LIKE :title ORDER BY n.postedDate DESC");
+	q.setParameter("status", true);
+	q.setParameter("title", "%" + title + "%");
+	return q.getResultList();
     }
 
     // Add business logic below. (Right-click in editor and choose

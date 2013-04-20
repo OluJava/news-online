@@ -19,5 +19,11 @@ public interface NewsSBLocal {
     List<News> getHeadLines();
 
     News getNewsById(int newsId);
-    
+
+    List<News> getPopularNews();
+
+    List<News> getRecentNews();
+
+    List<News> getNewsByTitle(String title);
+
 }

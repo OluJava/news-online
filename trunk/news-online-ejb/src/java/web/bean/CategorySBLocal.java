@@ -18,6 +18,8 @@ public interface CategorySBLocal {
 
     List<Category> getParentCategories();
 
-    List<Category> getSubCategories(int parentCategoryId);
+    List<Category> getSubCategories(String parentCategoryId);
+
+    Category getCategoryById(int id);
     
 }

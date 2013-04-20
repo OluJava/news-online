@@ -29,10 +29,16 @@ public class CategorySB implements CategorySBLocal {
 	return em.createQuery("SELECT c FROM Category c WHERE c.parent = 'None'").getResultList();
     }
 
-    public List<Category> getSubCategories(int parentCategoryId) {
+    public List<Category> getSubCategories(String parentCategoryId) {
 	Query q = em.createNamedQuery("Category.findByParent");
 	q.setParameter("parent", parentCategoryId);
 	return q.getResultList();
+    }
+
+    public Category getCategoryById(int id) {
+	Query q = em.createNamedQuery("Category.findByCategoryId");
+	q.setParameter("categoryId", id);
+	return (Category)q.getResultList().get(0);
     }
     
     // Add business logic below. (Right-click in editor and choose
