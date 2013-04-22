@@ -6,6 +6,7 @@
 package web.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,6 +68,10 @@ public class News implements Serializable {
     private Integer viewed;
     @Column(name = "Status")
     private Boolean status;
+    @OneToMany(mappedBy = "news")
+    private Collection<Comment> commentCollection;
+    @OneToMany(mappedBy = "news")
+    private Collection<HeadNews> headNewsCollection;
     @JoinColumn(name = "Uploader", referencedColumnName = "UserId")
     @ManyToOne
     private Users users;
@@ -166,6 +172,22 @@ public class News implements Serializable {
 
     public void setStatus(Boolean status) {
 	this.status = status;
+    }
+
+    public Collection<Comment> getCommentCollection() {
+	return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+	this.commentCollection = commentCollection;
+    }
+
+    public Collection<HeadNews> getHeadNewsCollection() {
+	return headNewsCollection;
+    }
+
+    public void setHeadNewsCollection(Collection<HeadNews> headNewsCollection) {
+	this.headNewsCollection = headNewsCollection;
     }
 
     public Users getUsers() {

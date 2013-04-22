@@ -39,6 +39,8 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Users.findByAddress", query = "SELECT u FROM Users u WHERE u.address = :address"),
     @NamedQuery(name = "Users.findByPhone", query = "SELECT u FROM Users u WHERE u.phone = :phone"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
+    @NamedQuery(name = "Users.findByQuestion", query = "SELECT u FROM Users u WHERE u.question = :question"),
+    @NamedQuery(name = "Users.findByAnswer", query = "SELECT u FROM Users u WHERE u.answer = :answer"),
     @NamedQuery(name = "Users.findByRoles", query = "SELECT u FROM Users u WHERE u.roles = :roles"),
     @NamedQuery(name = "Users.findByLastLogin", query = "SELECT u FROM Users u WHERE u.lastLogin = :lastLogin"),
     @NamedQuery(name = "Users.findByActiveSMS", query = "SELECT u FROM Users u WHERE u.activeSMS = :activeSMS"),
@@ -58,8 +60,7 @@ public class Users implements Serializable {
     @Column(name = "FullName")
     private String fullName;
     @Column(name = "Birthday")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date birthday;
+    private String birthday;
     @Column(name = "Gender")
     private Boolean gender;
     @Column(name = "Address")
@@ -68,6 +69,10 @@ public class Users implements Serializable {
     private String phone;
     @Column(name = "Email")
     private String email;
+    @Column(name = "Question")
+    private String question;
+    @Column(name = "Answer")
+    private String answer;
     @Column(name = "Roles")
     private String roles;
     @Column(name = "LastLogin")
@@ -80,6 +85,10 @@ public class Users implements Serializable {
     @JoinColumn(name = "Category", referencedColumnName = "CategoryId")
     @ManyToOne
     private Category category;
+    @OneToMany(mappedBy = "users")
+    private Collection<Comment> commentCollection;
+    @OneToMany(mappedBy = "users")
+    private Collection<Feedback> feedbackCollection;
     @OneToMany(mappedBy = "users")
     private Collection<News> newsCollection;
 
@@ -130,11 +139,11 @@ public class Users implements Serializable {
 	this.fullName = fullName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
 	return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
 	this.birthday = birthday;
     }
 
@@ -168,6 +177,22 @@ public class Users implements Serializable {
 
     public void setEmail(String email) {
 	this.email = email;
+    }
+
+    public String getQuestion() {
+	return question;
+    }
+
+    public void setQuestion(String question) {
+	this.question = question;
+    }
+
+    public String getAnswer() {
+	return answer;
+    }
+
+    public void setAnswer(String answer) {
+	this.answer = answer;
     }
 
     public String getRoles() {
@@ -208,6 +233,22 @@ public class Users implements Serializable {
 
     public void setCategory(Category category) {
 	this.category = category;
+    }
+
+    public Collection<Comment> getCommentCollection() {
+	return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+	this.commentCollection = commentCollection;
+    }
+
+    public Collection<Feedback> getFeedbackCollection() {
+	return feedbackCollection;
+    }
+
+    public void setFeedbackCollection(Collection<Feedback> feedbackCollection) {
+	this.feedbackCollection = feedbackCollection;
     }
 
     public Collection<News> getNewsCollection() {

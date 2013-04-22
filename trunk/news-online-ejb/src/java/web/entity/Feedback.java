@@ -6,7 +6,6 @@
 package web.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -49,8 +46,7 @@ public class Feedback implements Serializable {
     @Column(name = "Answer")
     private String answer;
     @Column(name = "PostedTime")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date postedTime;
+    private String postedTime;
     @Column(name = "Status")
     private Boolean status;
     @JoinColumn(name = "AnswerBy", referencedColumnName = "UserId")
@@ -104,11 +100,11 @@ public class Feedback implements Serializable {
 	this.answer = answer;
     }
 
-    public Date getPostedTime() {
+    public String getPostedTime() {
 	return postedTime;
     }
 
-    public void setPostedTime(Date postedTime) {
+    public void setPostedTime(String postedTime) {
 	this.postedTime = postedTime;
     }
 
