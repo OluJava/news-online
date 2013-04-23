@@ -28,6 +28,10 @@ public class HeadSB implements HeadSBLocal {
 	return em.createNamedQuery("HeadNews.findAll").getResultList();
     }
 
+    public void update(HeadNews news) {
+	em.merge(news);
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 

@@ -61,16 +61,6 @@
 		return str;
 	    }
 	    function validateTitle() {
-		if(trim(myform.title.value)==0)
-		{
-		    document.getElementById('errTitle').innerHTML="This is a required field.";
-		    document.getElementById('title').className="medium error";
-		}
-		else
-		{
-		    document.getElementById('errTitle').innerHTML="";
-		    document.getElementById('title').className="medium";
-		}
 		if(trim(myform.title.value).length < 20)
 		{
 		    document.getElementById('errTitle').innerHTML="At least 20 words.";
@@ -83,16 +73,6 @@
 		}
 	    }
 	    function validateAuthor() {
-		if(trim(myform.author.value)==0)
-		{
-		    document.getElementById('errAuthor').innerHTML="This is a required field.";
-		    document.getElementById('author').className="mini error";
-		}
-		else
-		{
-		    document.getElementById('errAuthor').innerHTML="";
-		    document.getElementById('author').className="mini";
-		}
 		if(trim(myform.author.value).length < 5)
 		{
 		    document.getElementById('errAuthor').innerHTML="At least 5 words.";
@@ -105,39 +85,42 @@
 		}
 	    }
 	    function validateDesc() {
-		if(trim(myform.desc.value)==0)
-		{
-		    document.getElementById('errDesc').innerHTML="This is a required field.";
-		}
-		else
-		{
-		    document.getElementById('errDesc').innerHTML="";
-		}
 		if(trim(myform.desc.value).length < 50)
 		{
 		    document.getElementById('errDesc').innerHTML="At least 50 words.";
+		    document.getElementById('desc').className="error";
 		}
 		else
 		{
 		    document.getElementById('errDesc').innerHTML="";
+		    document.getElementById('desc').className="normal";
 		}
 	    }
-	    function validateCont() {
-		if(trim(myform.cont.value)==0)
-		{
-		    document.getElementById('errCont').innerHTML="This is a required field.";
+	    function validate(){
+		if(trim(myform.title.value).length<20){
+		    alert("Please check Title field!");
+		    return false;
 		}
-		else
-		{
-		    document.getElementById('errCont').innerHTML="";
-		}
-		if(trim(myform.cont.value).length < 200)
-		{
-		    document.getElementById('errCont').innerHTML="At least 200 words.";
-		}
-		else
-		{
-		    document.getElementById('errCont').innerHTML="";
+		else{
+		    if(trim(myform.author.value).length<5){
+			alert("Please check Author field!");
+			return false;
+		    }
+		    else{
+			if(trim(myform.desc.value).length<50){
+			    alert("Please check Description field!");
+			    return false;
+			}
+			else{
+			    if(trim(myform.cont.value).length<200){
+				alert("Content must be at least 200 words!");
+				return false;
+			    }
+			    else{
+				return true;
+			    }
+			}
+		    }
 		}
 	    }
         </script>
@@ -169,7 +152,7 @@
             </div>
             <div class="grid_12">
                 <ul class="nav main">
-                    <li class="ic-form-style"><a href="/news-online-war/Admin?action=newsManager"><span>News Manager</span></a></li>
+                    <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
 		    <li class="ic-grid-tables"><a href="table.html"><span>Comment</span></a></li>
@@ -193,14 +176,14 @@
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Insert</a>
                                 <ul class="submenu">
-                                    <li><a href="news-add.jsp" >Add News</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=news-add" >Add News</a> </li>
                                     <li><a>Add Users</a> </li>
                                     <li><a>Add Category</a> </li>
                                 </ul>
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Trash</a>
                                 <ul class="submenu">
-                                    <li><a href="/news-online-war/Admin?action=newsTrash">News</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=news-trash">News</a> </li>
                                     <li><a>Users</a> </li>
                                     <li><a>Category</a> </li>
                                     <li><a>Comment</a> </li>
@@ -216,7 +199,7 @@
                     <h2>
                         Edit News</h2>
                     <div class="block ">
-                        <form name="myform" action="/news-online-war/Admin" method="POST">
+                        <form name="myform" action="/news-online-war/Admin" method="POST" onsubmit="return validate()">
                             <table class="form">
 				<tr>
 				    <td width="150px">
@@ -228,7 +211,7 @@
 					<input type="text" id="title" name="title" class="medium" maxlength="100" value="${news.title}" onblur="validateTitle()"/>
 					
 				    </td>
-				    <td><span id="errTitle" class="error"></span></td>
+				    <td><span style="font-weight: bold" id="errTitle" class="error"></span></td>
 				</tr>
 				<tr>
 				    <td>
@@ -239,7 +222,7 @@
 					<input type="text" id="author" name="author" class="mini" maxlength="30" value="${news.author}" onblur="validateAuthor()"/>
 					
 				    </td>
-				    <td><span id="errAuthor" class="error"></span></td>
+				    <td><span style="font-weight: bold" id="errAuthor" class="error"></span></td>
 				</tr>
 				<tr>
 				    <td>
@@ -247,7 +230,7 @@
 					    Image</label>
 				    </td>
 				    <td>
-					<input type="text" name="image" readonly="true" class="mini" value="${news.image}"/>
+					<input type="text" name="image" readonly="true" disabled="true" class="mini" value="${news.image}"/>
 					<button class="btn btn-small btn-grey">Browse</button>
 				    </td>
 				</tr>
@@ -257,7 +240,7 @@
 					    Preview</label>
 				    </td>
 				    <td>
-					<img src="admin/img/no-user.gif" alt="" width="240px" height="180px"/>
+					<img src="admin/img/no-photo.jpg" alt="" width="240px" height="180px"/>
 				    </td>
 				</tr>
 				<tr>
@@ -266,14 +249,9 @@
 					    Description</label>
 				    </td>
 				    <td>
-					<textarea cols="" rows=""  style="width:450px;height:65px; resize: none;padding: 4px 4px 5px 4px;
-						  border-top: 1px solid #b3b3b3;border-left: 1px solid #b3b3b3;
-						  border-right: 1px solid #eaeaea;border-bottom: 1px solid #eaeaea;
-						  font-family:Helvetica Neue, Arial" maxlength="200" id="desc" name="description" onblur="validateDesc()">
-${news.description}
-					</textarea>
+					<textarea class="normal"  maxlength="200" id="desc" name="description" onblur="validateDesc()">${news.description}</textarea>
 				    </td>
-				    <td style="vertical-align: top; padding-top: 9px;"><span id="errDesc" class="error"></span></td>
+				    <td style="vertical-align: top; padding-top: 9px;"><span style="font-weight: bold" id="errDesc" class="error"></span></td>
 				</tr>
 				<tr>
 				    <td style="vertical-align: top; padding-top: 9px;">
@@ -282,9 +260,7 @@ ${news.description}
 				    </td>
 				    <td colspan="2">
 					<div style="width: 750px">
-					    <textarea class="ckeditor" id="cont" name="content" onblur="validateCont()">
-					    ${news.content}
-					    </textarea>
+					    <textarea class="ckeditor" id="cont" name="content">${news.content}</textarea>
 					    <button style="float: right; margin-top: 5px" class="btn btn-small btn-grey">Insert Image</button>
 					</div>
 				    </td>
@@ -302,8 +278,8 @@ ${news.description}
 				    <td></td>
 				    <td>
 					<div style="margin-top: 35px">
+					    <button type="submit" name="action" value="news-list" class="btn-icon btn-grey btn-arrow-left"><span></span>Back</button>
 					    <button type="submit" name="action" value="Save" class="btn-icon btn-grey btn-check"><span></span>Save</button>
-					    <button type="submit" name="action" value="Reset" class="btn-mini btn-black btn-arrow-left"><span></span>Back</button>
 					</div>
 				    </td>
 				</tr>
@@ -319,7 +295,7 @@ ${news.description}
         </div>
         <div id="site_info">
             <p>
-                Copyright <a href="/news-online-war/Admin?action=goHome">NewsOnline Admin</a>. All Rights Reserved.
+                Copyright <a href="/news-online-war/Admin?action=index">NewsOnline Admin</a>. All Rights Reserved.
             </p>
         </div>
     </body>

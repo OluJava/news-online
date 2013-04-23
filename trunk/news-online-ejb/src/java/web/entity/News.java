@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -43,14 +45,15 @@ import javax.persistence.TemporalType;
 public class News implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "NewsId", nullable = false)
     private Integer newsId;
-    @Column(name = "Title", length = 50)
+    @Column(name = "Title", length = 100)
     private String title;
     @Column(name = "Image", length = 100)
     private String image;
-    @Column(name = "Description", length = 150)
+    @Column(name = "Description", length = 200)
     private String description;
     @Column(name = "Content", length = 1073741823)
     private String content;

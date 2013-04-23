@@ -136,7 +136,7 @@
 			</figure>
 			<div class="content">
 			    <h2><a href="Client?action=viewDetail&newsId=${item.newsId}" title="View permalink ${item.title}">${item.title}</a></h2>
-			    <p>${item.description}</p>
+			    <div style="width: 460px"><p>${item.description}</p></div>
 			</div>
 			<div class="meta">
 			    <span style="color: black" class="pull-left">By ${item.author} - <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></span>
