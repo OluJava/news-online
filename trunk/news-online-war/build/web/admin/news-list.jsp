@@ -5,6 +5,7 @@
 --%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -71,13 +72,12 @@
 	    </div>
 	    <div class="grid_12">
 		<ul class="nav main">
-                    <li class="ic-form-style"><a href="/news-online-war/Admin?action=newsManager"><span>News Manager</span></a></li>
+                    <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
 		    <li class="ic-grid-tables"><a href="#"><span>Comment</span></a></li>
                     <li class="ic-gallery dd"><a href="#"><span>Image Galleries</span></a></li>
                     <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
-
                 </ul>
 	    </div>
 	    <div class="clear">
@@ -95,14 +95,14 @@
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Insert</a>
                                 <ul class="submenu">
-                                    <li><a href="news-add.jsp" >Add News</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=news-add" >Add News</a> </li>
                                     <li><a>Add Users</a> </li>
                                     <li><a>Add Category</a> </li>
                                 </ul>
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Trash</a>
                                 <ul class="submenu">
-                                    <li><a href="/news-online-war/Admin?action=newsTrash">News</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=news-trash">News</a> </li>
                                     <li><a>Users</a> </li>
                                     <li><a>Category</a> </li>
                                     <li><a>Comment</a> </li>
@@ -136,16 +136,16 @@
 				<tr class="gradeA">
 				    <td>${item.title}</td>
 				    <td>${item.author}</td>
-				    <td>${item.postedDate}</td>
-				    <td>${item.editedDate}</td>
+				    <td><fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></td>
+				    <td><fmt:formatDate pattern="MMM. dd, yyyy" value="${item.editedDate}" /></td>
 				    <td>${item.viewed}</td>
 				    <td align="center">
-					<a href="/news-online-war/Admin?action=edit&newsId=${item.newsId}">
+					<a href="/news-online-war/Admin?action=news-edit&newsId=${item.newsId}">
 					    <img src="admin/img/edit.png" alt="Edit News"/>
 					</a>
 				    </td>
 				    <td align="center">
-					<a href="/news-online-war/Admin?action=remove&newsId=${item.newsId}">
+					<a href="/news-online-war/Admin?action=Remove&newsId=${item.newsId}">
 					    <img src="admin/img/trash.png" alt="Remove News"/>
 					</a>
 				    </td>
@@ -163,7 +163,7 @@
 	</div>
 	<div id="site_info">
 	    <p>
-		Copyright <a href="/news-online-war/Admin?action=goHome">NewsOnline Admin</a>. All Rights Reserved.
+		Copyright <a href="/news-online-war/Admin?action=index">NewsOnline Admin</a>. All Rights Reserved.
 	    </p>
 	</div>
     </body>

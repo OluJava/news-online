@@ -18,4 +18,6 @@ public interface HeadSBLocal {
 
     List<HeadNews> getHeads();
 
+    void update(HeadNews news);
+
 }

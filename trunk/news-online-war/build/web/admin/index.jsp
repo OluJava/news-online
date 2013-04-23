@@ -70,12 +70,13 @@
 	    </div>
 	    <div class="grid_12">
 		<ul class="nav main">
-                    <li class="ic-form-style"><a href="../Admin?action=newsManager"><span>News Manager</span></a></li>
+                    <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
 		    <li class="ic-grid-tables"><a href="table.html"><span>Comment</span></a></li>
                     <li class="ic-gallery dd"><a href="#"><span>Image Galleries</span></a></li>
                     <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
+		    <li class="ic-dashboard"><a href="#"><span>Feedback</span></a></li>
 
                 </ul>
 	    </div>
@@ -94,14 +95,14 @@
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Insert</a>
                                 <ul class="submenu">
-                                    <li><a href="news-add.jsp" >Add News</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=news-add" >Add News</a> </li>
                                     <li><a>Add Users</a> </li>
                                     <li><a>Add Category</a> </li>
                                 </ul>
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Trash</a>
                                 <ul class="submenu">
-                                    <li><a href="../Admin?action=newsTrash">News</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=news-trash">News</a> </li>
                                     <li><a>Users</a> </li>
                                     <li><a>Category</a> </li>
                                     <li><a>Comment</a> </li>
@@ -136,7 +137,7 @@
 	</div>
 	<div id="site_info">
 	    <p>
-		Copyright <a href="#">NewsOnline Admin</a>. All Rights Reserved.
+		Copyright <a href="/news-online-war/Admin?action=index">NewsOnline Admin</a>. All Rights Reserved.
 	    </p>
 	</div>
     </body>
