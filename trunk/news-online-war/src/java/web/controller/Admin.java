@@ -68,7 +68,7 @@ public class Admin extends HttpServlet {
 		request.setAttribute("news", news);
 		request.getRequestDispatcher("admin/news-edit.jsp").forward(request, response);
 	    }
-	    else if(sAction.equals("save"))
+	    else if(sAction.equals("Save"))
 	    {
 		int newsId = Integer.parseInt(request.getParameter("newsId"));
 		String title = request.getParameter("title");
@@ -79,16 +79,8 @@ public class Admin extends HttpServlet {
 		String tag = request.getParameter("tags");
 
 		News news = newsSB.getNewsById(newsId);
-		if(title.equals("") || title == null)
-		{
-		    request.setAttribute("miss-title", "Title is required!");
-		    request.getRequestDispatcher("admin/news-edit.jsp").forward(request, response);
-		}
-		else if(author.equals("") || author == null)
-		{
-
-		}
-		if(newsSB.getNews(title).size() >= 1)
+		
+		if(newsSB.getNews(title).size() < 2)
 		{
 		    news.setTitle(title);
 		    news.setAuthor(author);
@@ -101,6 +93,7 @@ public class Admin extends HttpServlet {
 		}
 		else
 		{
+		    request.setAttribute("news", news);
 		    request.setAttribute("error", "Title is duplicated!");
 		    request.getRequestDispatcher("admin/news-edit.jsp").forward(request, response);
 		}
