@@ -236,7 +236,7 @@
 					    Author</label>
 				    </td>
 				    <td>
-					<input type="text" id="author" name="author" class="mini" maxlength="30" value="${news.title}" onblur="validateAuthor()"/>
+					<input type="text" id="author" name="author" class="mini" maxlength="30" value="${news.author}" onblur="validateAuthor()"/>
 					
 				    </td>
 				    <td><span id="errAuthor" class="error"></span></td>
@@ -257,7 +257,7 @@
 					    Preview</label>
 				    </td>
 				    <td>
-					<img src="admin/img/no-image.png" alt="" width="240px" height="180px"/>
+					<img src="admin/img/no-user.gif" alt="" width="240px" height="180px"/>
 				    </td>
 				</tr>
 				<tr>
@@ -273,7 +273,7 @@
 ${news.description}
 					</textarea>
 				    </td>
-				    <td><span id="errDesc" class="error"></span></td>
+				    <td style="vertical-align: top; padding-top: 9px;"><span id="errDesc" class="error"></span></td>
 				</tr>
 				<tr>
 				    <td style="vertical-align: top; padding-top: 9px;">
@@ -303,7 +303,7 @@ ${news.description}
 				    <td>
 					<div style="margin-top: 35px">
 					    <button type="submit" name="action" value="Save" class="btn-icon btn-grey btn-check"><span></span>Save</button>
-					    <button type="reset" name="action" value="Reset" class="btn-icon btn-grey btn-refresh"><span></span>Reset</button>
+					    <button type="submit" name="action" value="Reset" class="btn-mini btn-black btn-arrow-left"><span></span>Back</button>
 					</div>
 				    </td>
 				</tr>
