@@ -84,8 +84,9 @@
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
 		    <li class="ic-grid-tables"><a href="#"><span>Comment</span></a></li>
-                    <li class="ic-gallery dd"><a href="#"><span>Image Galleries</span></a></li>
+                    <li class="ic-gallery dd"><a href="/news-online-war/Admin?action=image-list"><span>Image Galleries</span></a></li>
                     <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
+		    <li class="ic-dashboard"><a href="/news-online-war/Admin?action=news-popular"><span>News Popular</span></a></li>
 		</ul>
 	    </div>
 	    <div class="clear">
@@ -126,24 +127,23 @@
 		    <h2>Notifications</h2>
 
 		    <div class="block">
-			<c:choose>
-			    <c:when test="${sucsess != null}">
+			
+			    <c:if test="${not empty done}">
 				<div class="message success">
 				    <h5>Success!</h5>
 				    <p>
-				${success}
+				${done}
 				    </p>
 				</div>
-			    </c:when>
-			    <c:otherwise>
+			    </c:if>
+			    <c:if test="${not empty error}">
 				<div class="message error">
 				    <h5>Error!</h5>
 				    <p>
 				${error}
 				    </p>
 				</div>
-			    </c:otherwise>
-			</c:choose>"
+			    </c:if>
 		    </div>
 
 		</div>

@@ -1,48 +1,63 @@
 <%-- 
-    Document   : news-list
-    Created on : Apr 22, 2013, 5:34:26 PM
+    Document   : image-list
+    Created on : Apr 23, 2013, 4:30:34 PM
     Author     : Khatmau_sr
 --%>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>News | NewsOnline Admin</title>
+	<title>Image Gallery | NewsOnline Admin</title>
 	<link rel="stylesheet" type="text/css" href="admin/css/reset.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/text.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/grid.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/layout.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/nav.css" media="screen" />
-	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
-	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-	<link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
+	<link href="admin/css/gallery.css" rel="stylesheet" type="text/css" />
+	<link href="admin/css/facebox.css" rel="stylesheet" type="text/css" />
+	<link href="admin/css/tabs.css" rel="stylesheet" type="text/css" />
+	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="admin/css/ie6.css" media="screen" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="admin/css/ie.css" media="screen" /><![endif]-->
 	<!-- BEGIN: load jquery -->
 	<script src="admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="admin/js/jquery-ui/jquery.ui.core.min.js"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.core.min.js" type="text/javascript"></script>
 	<script src="admin/js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
 	<script src="admin/js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
 	<script src="admin/js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
 	<script src="admin/js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
-	<script src="admin/js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
-	<script src="admin/js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
-	<script src="admin/js/table/jquery.dataTables.min.js" type="text/javascript"></script>
 	<!-- END: load jquery -->
-	<script type="text/javascript" src="admin/js/table/table.js"></script>
+	<script src="admin/js/popup/jquery.facebox.js" type="text/javascript"></script>
+	<script src="admin/js/quick-sand/jquery.quicksand.js" type="text/javascript"></script>
 	<script src="admin/js/setup.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
 	    $(document).ready(function () {
+		setupGallery();
 		setupLeftMenu();
-
-		$('.datatable').dataTable();
 		setSidebarHeight();
 
-
 	    });
+	    function validate(){
+		var name = myform.file1.value;
+
+		if(name.length==0){
+		    alert("Please select a picture!");
+		    return false;
+		}
+		else{
+		    var ext = name.substring(name.lastIndexOf('.') + 1).toUpperCase();
+		    if(ext != "GIF" && ext != "JPG" && ext != "PNG"){
+			alert(ext + " file is not allowed! Only GIF, PNG, JPG!");
+			return false;
+		    }
+		    else{
+			return true;
+		    }
+		}
+	    }
 	</script>
     </head>
     <body>
@@ -72,14 +87,15 @@
 	    </div>
 	    <div class="grid_12">
 		<ul class="nav main">
-                    <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
+		    <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
 		    <li class="ic-grid-tables"><a href="#"><span>Comment</span></a></li>
                     <li class="ic-gallery dd"><a href="/news-online-war/Admin?action=image-list"><span>Image Galleries</span></a></li>
                     <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
 		    <li class="ic-dashboard"><a href="/news-online-war/Admin?action=news-popular"><span>News Popular</span></a></li>
-                </ul>
+
+		</ul>
 	    </div>
 	    <div class="clear">
 	    </div>
@@ -87,7 +103,7 @@
 		<div class="box sidemenu">
 		    <div class="block" id="section-menu">
 			<ul class="section menu">
-			<li><a class="menuitem" style="cursor: default" >Account</a>
+			    <li><a class="menuitem" style="cursor: default" >Account</a>
                                 <ul class="submenu">
                                     <li><a>Update profile</a> </li>
                                     <li><a>Change password</a> </li>
@@ -115,45 +131,42 @@
 		</div>
 	    </div>
 	    <div class="grid_10">
-		<div class="box round first grid">
-		    <h2>
-			News List</h2>
-		    <div class="block">
+		<div class="box round first">
 
-			<table class="data display datatable" id="example">
-			    <thead>
-				<tr>
-				    <th width="45%">News Title</th>
-				    <th width="14%">Author</th>
-				    <th width="13%">Posted Date</th>
-				    <th width="13%">Edited Date</th>
-				    <th width="5%">View</th>
-				    <th width="5%" align="center">Update</th>
-				    <th width="5%">Remove</th>
-				</tr>
-			    </thead>
-			    <tbody>
-				<c:forEach items="${newsList}" var="item">
-				<tr class="gradeA">
-				    <td>${item.title}</td>
-				    <td>${item.author}</td>
-				    <td><fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></td>
-				    <td><fmt:formatDate pattern="MMM. dd, yyyy" value="${item.editedDate}" /></td>
-				    <td>${item.viewed}</td>
-				    <td align="center">
-					<a href="/news-online-war/Admin?action=news-edit&newsId=${item.newsId}">
-					    <img src="admin/img/edit.png" alt="Edit News"/>
-					</a>
-				    </td>
-				    <td align="center">
-					<a onclick="return confirm('Are you sure you want to remove this news')" href="/news-online-war/Admin?action=Remove&newsId=${item.newsId}">
-					    <img src="admin/img/trash.png" alt="Remove News"/>
-					</a>
-				    </td>
-				</tr>
-				</c:forEach>
-			    </tbody>
-			</table>
+                    <h2>Image Gallery</h2>
+                    <div class="block">
+			<div class="gallery-sand">
+			    <form id="myform" action="/news-online-war/Admin?action=Upload" method="POST" onsubmit="return validate()" enctype="multipart/form-data">
+			    <div class="filter-options">
+				<input type="file" size="50" id="file1" name="file1" value="" style="border: 1px solid #777777;
+				      background: #9E9E96;
+				      color: white;
+				      font: bold 11px 'Trebuchet MS';
+				      padding: 4px;
+				      cursor: pointer;
+				      -moz-border-radius: 4px;
+				      -webkit-border-radius: 4px;"/>
+				<button type="submit" class="btn-icon btn-grey btn-plus"><span></span>Upload Image</button>
+			    </div>
+			    </form>
+			    <!-- Big Gallery Sorting: End -->
+			    <!-- Small Gallery Content: Start -->
+			    <div class="filter-results">
+				<ul class="gallery small">
+				    <!-- Small Gallery Image: Start -->
+				    <c:forEach items="${imageList}" var="item">
+				    <li>
+					<div class="actions">
+					    <a href="/news-online-war/Admin?action=deleteimage&img=${item}" class="delete">delete</a>
+					</div>
+                                        <img width="111px" height="91" src="admin/img/news/${item}" alt="" />
+                                    </li>
+				    </c:forEach>
+				    <!-- Small Gallery Image: End -->
+				</ul>
+			    </div>
+			    <!-- Small Gallery Content: End -->
+			</div>
 		    </div>
 		</div>
 	    </div>
