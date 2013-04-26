@@ -4,6 +4,7 @@
     Author     : Khatmau_sr
 --%>
 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="admin/css/grid.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="admin/css/layout.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="admin/css/nav.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/basic.css" media="screen" />
         <!--[if IE 6]><link rel="stylesheet" type="text/css" href="admin/css/ie6.css" media="screen" /><![endif]-->
         <!--[if IE 7]><link rel="stylesheet" type="text/css" href="admin/css/ie.css" media="screen" /><![endif]-->
         <!-- BEGIN: load jquery -->
@@ -43,6 +45,10 @@
         <script type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.bubbleRenderer.min.js"></script>
         <!-- END: load jqplot -->
         <script src="admin/js/setup.js" type="text/javascript"></script>
+
+	<!-- Load jQuery, SimpleModal and Basic JS files -->
+	<script type="text/javascript" src="admin/js/jquery.simplemodal.js"></script>
+	<script type="text/javascript" src="admin/js/basic.js"></script>
         <script type="text/javascript">
 
             $(document).ready(function () {
@@ -123,6 +129,11 @@
 		    }
 		}
 	    }
+	    function setImage(img){
+		var name = img.src.split("/");
+		myform.image.value = name[name.length-1];
+		myform.imgPreview.src = img.src;
+	    }
         </script>
     </head>
     <body>
@@ -155,10 +166,10 @@
                     <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
-		    <li class="ic-grid-tables"><a href="table.html"><span>Comment</span></a></li>
-                    <li class="ic-gallery dd"><a href="#"><span>Image Galleries</span></a></li>
+		    <li class="ic-grid-tables"><a href="#"><span>Comment</span></a></li>
+                    <li class="ic-gallery dd"><a href="/news-online-war/Admin?action=image-list"><span>Image Galleries</span></a></li>
                     <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
-
+		    <li class="ic-dashboard"><a href="/news-online-war/Admin?action=news-popular"><span>News Popular</span></a></li>
                 </ul>
             </div>
             <div class="clear">
@@ -199,7 +210,7 @@
                     <h2>
                         Edit News</h2>
                     <div class="block ">
-                        <form name="myform" action="/news-online-war/Admin" method="POST" onsubmit="return validate()">
+                        <form name="myform" action="/news-online-war/Admin" onsubmit="return validate()" method="POST">
                             <table class="form">
 				<tr>
 				    <td width="150px">
@@ -230,8 +241,16 @@
 					    Image</label>
 				    </td>
 				    <td>
-					<input type="text" name="image" readonly="true" disabled="true" class="mini" value="${news.image}"/>
-					<button class="btn btn-small btn-grey">Browse</button>
+					<div id="basic-modal">
+					<input type="text" id="image" name="image" readonly="true" class="mini" value="${news.image}"/>
+					<button class="btn btn-small btn-grey basic">Browse</button>
+					</div>
+					<div id="basic-modal-content">
+					    <c:forEach items="${imageList}" var="item">
+						<img width="81px" height="61" onclick="setImage(this)" src="admin/img/news/${item}" style="margin: 5px; cursor: pointer"/>
+					    </c:forEach>
+
+					</div>
 				    </td>
 				</tr>
 				<tr>
@@ -240,7 +259,7 @@
 					    Preview</label>
 				    </td>
 				    <td>
-					<img src="admin/img/no-photo.jpg" alt="" width="240px" height="180px"/>
+					<img id="imgPreview" src="admin/img/news/${news.image}" alt="" width="240px" height="180px"/>
 				    </td>
 				</tr>
 				<tr>
@@ -261,7 +280,6 @@
 				    <td colspan="2">
 					<div style="width: 750px">
 					    <textarea class="ckeditor" id="cont" name="content">${news.content}</textarea>
-					    <button style="float: right; margin-top: 5px" class="btn btn-small btn-grey">Insert Image</button>
 					</div>
 				    </td>
 				</tr>
@@ -271,15 +289,14 @@
 					    Tags</label>
 				    </td>
 				    <td>
-					<input type="text" name="tags" class="mini" maxlength="50" value="${news.tags}"/> (Optional)
+					<input type="text" name="tags" class="mini" maxlength="50" value="${news.tags}"/> Optional! Use (;) to separate multiple tags.
 				    </td>
 				</tr>
 				<tr>
 				    <td></td>
 				    <td>
 					<div style="margin-top: 35px">
-					    <button type="submit" name="action" value="news-list" class="btn-icon btn-grey btn-arrow-left"><span></span>Back</button>
-					    <button type="submit" name="action" value="Save" class="btn-icon btn-grey btn-check"><span></span>Save</button>
+					    <button type="submit" name="action" value="Save" class="btn-icon btn-grey btn-check"><span></span>Save News</button>
 					</div>
 				    </td>
 				</tr>

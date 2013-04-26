@@ -3,34 +3,34 @@
     Created on : Apr 23, 2013, 3:19:17 PM
     Author     : Khatmau_sr
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>News Popular | NewsOnline Admin</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
-	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
-	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-	<link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="admin/css/reset.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/text.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/grid.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/layout.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/nav.css" media="screen" />
+	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="admin/css/ie6.css" media="screen" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="admin/css/ie.css" media="screen" /><![endif]-->
+	<link href="admin/css/table/demo_page.css" rel="stylesheet" type="text/css" />
 	<!-- BEGIN: load jquery -->
-	<script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery-ui/jquery.ui.core.min.js"></script>
-	<script src="js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
-	<script src="js/table/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.core.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
+	<script src="admin/js/table/jquery.dataTables.min.js" type="text/javascript"></script>
 	<!-- END: load jquery -->
-	<script type="text/javascript" src="js/table/table.js"></script>
-	<script src="js/setup.js" type="text/javascript"></script>
+	<script type="text/javascript" src="admin/js/table/table.js"></script>
+	<script src="admin/js/setup.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
 	    $(document).ready(function () {
@@ -48,10 +48,10 @@
 	    <div class="grid_12 header-repeat">
 		<div id="branding">
 		    <div class="floatleft">
-			<img src="img/logo.png" alt="Logo" /></div>
+			<img src="admin/img/logo.png" alt="Logo" /></div>
 		    <div class="floatright">
 			<div class="floatleft">
-			    <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
+			    <img src="admin/img/img-profile.jpg" alt="Profile Pic" /></div>
 			<div class="floatleft marginleft10">
 			    <ul class="inline-ul floatleft">
 				<li>Hello Admin</li>
@@ -73,9 +73,10 @@
                     <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
-		    <li class="ic-grid-tables"><a href="table.html"><span>Comment</span></a></li>
-                    <li class="ic-gallery dd"><a href="#"><span>Image Galleries</span></a></li>
+		    <li class="ic-grid-tables"><a href="#"><span>Comment</span></a></li>
+                    <li class="ic-gallery dd"><a href="/news-online-war/Admin?action=image-list"><span>Image Galleries</span></a></li>
                     <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
+		    <li class="ic-dashboard"><a href="/news-online-war/Admin?action=news-popular"><span>News Popular</span></a></li>
 
                 </ul>
 	    </div>
@@ -115,51 +116,88 @@
 	    <div class="grid_10">
 		<div class="box round first grid">
 		    <h2>
-			News Popular</h2>
+			Popular News</h2>
 		    <div class="block">
-			<table class="form">
-			    <tr>
-				<td width="150px">The Main News</td>
-				<td class="col2">
-				    <select style="width: 289px" id="select" name="select">
-					<option value="1">Camerette - Your Time to Dream</option>
-				    </select>
-				</td>
-			    </tr>
-			    <tr>
-				<td>The first News</td>
-				<td>
-				    <select style="width: 290px" id="select" name="select">
-					<option value="1">Glass House Below The Dark of Moon Light</option>
-				    </select>
-				</td>
-			    </tr>
-			    <tr>
-				<td>The second News</td>
-				<td>
-				    <select  style="width: 290px"id="select" name="select">
-					<option value="1">Mosaic Pool is Very Amazing And Beautiful</option>
-				    </select>
-				</td>
-			    </tr>
-			    <tr>
-				<td>The thirth News</td>
-				<td>
-				    <select style="width: 290px" id="select" name="select">
-					<option value="1">Winter Kitchen with Silver Panorama</option>
-				    </select>
-				</td>
-			    </tr>
-			    <tr>
-				<td></td>
-				<td>
-				    <div style="margin-top: 25px">
-					<button class="btn-icon btn-grey btn-check"><span></span>Accept</button>
-					<button class="btn-icon btn-grey btn-home"><span></span>Back</button>
-				    </div>
-				</td>
-			    </tr>
-			</table>
+			<form action="/news-online-war/Admin" method="POST">
+			    <table class="form">
+				<tr>
+				    <td width="150px">The Main News</td>
+				    <td class="col2">
+					<select style="width: 289px" name="news1">
+					    <c:forEach items="${newsList}" var="item">
+						<c:choose>
+						    <c:when test="${cur_List[0] == item.newsId}">
+							<option selected value="${item.newsId}">${item.title}</option>
+						    </c:when>
+						    <c:otherwise>
+							<option value="${item.newsId}">${item.title}</option>
+						    </c:otherwise>
+						</c:choose>
+					    </c:forEach>
+					</select>
+				    </td>
+				</tr>
+				<tr>
+				    <td>The first News</td>
+				    <td>
+					<select style="width: 290px" name="news2">
+					    <c:forEach items="${newsList}" var="item">
+						<c:choose>
+						    <c:when test="${cur_List[1] == item.newsId}">
+							<option selected value="${item.newsId}">${item.title}</option>
+						    </c:when>
+						    <c:otherwise>
+							<option value="${item.newsId}">${item.title}</option>
+						    </c:otherwise>
+						</c:choose>
+					    </c:forEach>
+					</select>
+				    </td>
+				</tr>
+				<tr>
+				    <td>The second News</td>
+				    <td>
+					<select  style="width: 290px" name="news3">
+					    <c:forEach items="${newsList}" var="item">
+						<c:choose>
+						    <c:when test="${cur_List[2] == item.newsId}">
+							<option selected value="${item.newsId}">${item.title}</option>
+						    </c:when>
+						    <c:otherwise>
+							<option value="${item.newsId}">${item.title}</option>
+						    </c:otherwise>
+						</c:choose>
+					    </c:forEach>
+					</select>
+				    </td>
+				</tr>
+				<tr>
+				    <td>The thirth News</td>
+				    <td>
+					<select style="width: 290px" name="news4">
+					    <c:forEach items="${newsList}" var="item">
+						<c:choose>
+						    <c:when test="${cur_List[3] == item.newsId}">
+							<option selected value="${item.newsId}">${item.title}</option>
+						    </c:when>
+						    <c:otherwise>
+							<option value="${item.newsId}">${item.title}</option>
+						    </c:otherwise>
+						</c:choose>
+					    </c:forEach>
+					</select>
+				    </td>
+				</tr>
+				<tr>
+				    <td></td>
+				    <td>
+					<div style="margin-top: 25px">
+					    <button type="submit" name="action" value="Accept" class="btn-icon btn-grey btn-check"><span></span>Accept</button>
+					</div>
+				    </td>
+				</tr>
+			    </table>
+			</form>
 		    </div>
 		</div>
 	    </div>

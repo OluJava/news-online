@@ -12,27 +12,27 @@
     <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>News Trash | NewsOnline Admin</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
-	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
-	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-	<link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="admin/css/reset.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/text.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/grid.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/layout.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="admin/css/nav.css" media="screen" />
+	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="admin/css/ie6.css" media="screen" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="admin/css/ie.css" media="screen" /><![endif]-->
+	<link href="admin/css/table/demo_page.css" rel="stylesheet" type="text/css" />
 	<!-- BEGIN: load jquery -->
-	<script src="js/jquery-1.6.4.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery-ui/jquery.ui.core.min.js"></script>
-	<script src="js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
-	<script src="js/table/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.core.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
+	<script src="admin/js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
+	<script src="admin/js/table/jquery.dataTables.min.js" type="text/javascript"></script>
 	<!-- END: load jquery -->
-	<script type="text/javascript" src="js/table/table.js"></script>
-	<script src="js/setup.js" type="text/javascript"></script>
+	<script type="text/javascript" src="admin/js/table/table.js"></script>
+	<script src="admin/js/setup.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
 	    $(document).ready(function () {
@@ -50,10 +50,10 @@
 	    <div class="grid_12 header-repeat">
 		<div id="branding">
 		    <div class="floatleft">
-			<img src="img/logo.png" alt="Logo" /></div>
+			<img src="admin/img/logo.png" alt="Logo" /></div>
 		    <div class="floatright">
 			<div class="floatleft">
-			    <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
+			    <img src="admin/img/img-profile.jpg" alt="Profile Pic" /></div>
 			<div class="floatleft marginleft10">
 			    <ul class="inline-ul floatleft">
 				<li>Hello Admin</li>
@@ -76,9 +76,9 @@
                     <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
                     <li class="ic-charts"><a href="#"><span>Category</span></a></li>
 		    <li class="ic-grid-tables"><a href="#"><span>Comment</span></a></li>
-                    <li class="ic-gallery dd"><a href="#"><span>Image Galleries</span></a></li>
+                    <li class="ic-gallery dd"><a href="/news-online-war/Admin?action=image-list"><span>Image Galleries</span></a></li>
                     <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
-
+		    <li class="ic-dashboard"><a href="/news-online-war/Admin?action=news-popular"><span>News Popular</span></a></li>
                 </ul>
 	    </div>
 	    <div class="clear">
@@ -127,7 +127,7 @@
 				    <th width="10%">Posted Date</th>
 				    <th width="10%">Edited Date</th>
 				    <th width="5%" align="center">Restore</th>
-				    <th width="5%">Remove</th>
+				    <th width="5%">Delete</th>
 				</tr>
 			    </thead>
 			    <tbody>
@@ -142,7 +142,7 @@
 					</a>
 				    </td>
 				    <td align="center">
-					<a href="/news-online-war/Admin?action=Delete&newsId=${item.newsId}">
+					<a onclick="return confirm('Are you sure you want to delete this news')" href="/news-online-war/Admin?action=Delete&newsId=${item.newsId}">
 					    <img src="admin/img/cross.png" alt="Delete News"/>
 					</a>
 				    </td>
