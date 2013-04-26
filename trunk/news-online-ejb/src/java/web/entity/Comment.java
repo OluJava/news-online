@@ -6,6 +6,7 @@
 package web.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -38,8 +41,9 @@ public class Comment implements Serializable {
     private Integer commentId;
     @Column(name = "Content", length = 255)
     private String content;
-    @Column(name = "PostedDate", length = 10)
-    private String postedDate;
+    @Column(name = "PostedDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date postedDate;
     @Column(name = "Likes")
     private Integer likes;
     @Column(name = "Spams")
@@ -76,11 +80,11 @@ public class Comment implements Serializable {
 	this.content = content;
     }
 
-    public String getPostedDate() {
+    public Date getPostedDate() {
 	return postedDate;
     }
 
-    public void setPostedDate(String postedDate) {
+    public void setPostedDate(Date postedDate) {
 	this.postedDate = postedDate;
     }
 
