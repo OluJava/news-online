@@ -3,16 +3,14 @@
     Created on : Apr 22, 2013, 2:06:39 PM
     Author     : Khatmau_sr
 --%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<html lang="en">
 
     <head>
 
@@ -36,173 +34,174 @@
 	<link href="css/Bitter.css" rel='stylesheet' type='text/css'>
 	<link href="css/Open_Sans.css" rel='stylesheet' type='text/css'>
 
-    <noscript><link rel="stylesheet" href="css/no-js.css"></noscript> <!-- If JavaScript Disabled -->
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
-    <!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+	<!-- JavaScript -->
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script type='text/javascript' src='js/bootstrap.min.js'></script>
+	<script type='text/javascript' src='js/jquery.easing.js'></script>
+	<script type='text/javascript' src='js/jquery.flexslider-min.js'></script>
+	<script type='text/javascript' src='js/jflickrfeed.min.js'></script>
+	<script type='text/javascript' src='js/jquery.fitvids.min.js'></script>
+	<script type='text/javascript' src='js/jquery.lazyload.mini.js'></script>
+	<script type='text/javascript' src='js/jquery.prettyPhoto.js'></script>
+	<script type='text/javascript' src='js/jquery.placeholder.min.js'></script>
+	<script type='text/javascript' src='js/jquery.jticker.js'></script>
+	<script type='text/javascript' src='js/jquery.mobilemenu.js'></script>
+	<script type='text/javascript' src='js/jquery.isotope.min.js'></script>
+	<script type='text/javascript' src='js/jquery.hoverdir.js'></script>
+	<script type='text/javascript' src='js/modernizr.custom.js'></script>
+	<script type="text/javascript" src="js/main.js"></script>
 
-    <!-- Favicons -->
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    </head>
 
-    <!-- JavaScript -->
-    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-    <script type='text/javascript' src='js/bootstrap.min.js'></script>
-    <script type='text/javascript' src='js/jquery.easing.js'></script>
-    <script type='text/javascript' src='js/jquery.flexslider-min.js'></script>
-    <script type='text/javascript' src='js/jflickrfeed.min.js'></script>
-    <script type='text/javascript' src='js/jquery.fitvids.min.js'></script>
-    <script type='text/javascript' src='js/jquery.lazyload.mini.js'></script>
-    <script type='text/javascript' src='js/jquery.prettyPhoto.js'></script>
-    <script type='text/javascript' src='js/jquery.placeholder.min.js'></script>
-    <script type='text/javascript' src='js/jquery.jticker.js'></script>
-    <script type='text/javascript' src='js/jquery.mobilemenu.js'></script>
-    <script type='text/javascript' src='js/jquery.isotope.min.js'></script>
-    <script type='text/javascript' src='js/jquery.hoverdir.js'></script>
-    <script type='text/javascript' src='js/modernizr.custom.js'></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <body>
+	<div id="top-navigation">
+	    <div class="container">
+		<!-- Navigation -->
+		<ul class="nav-menu pull-left">
+		    <li class="active"><a href="Client?action=goHome">Home</a></li>
+		    <li><a href="Client?action=aboutus">About Us</a></li>
+		    <li><a href="Client?action=support">Support</a></li>
+		</ul>
 
-</head>
+		<!-- Search Form -->
+		<form name="form-search" method="post" action="Client?action=search" class="form-search pull-right">
+		    <input type="text" name="search" placeholder="Search...." class="input-icon input-icon-search" />
+		</form>
 
-<body>
-    <div id="top-navigation">
-        <div class="container">
-            <!-- Navigation -->
-            <ul class="nav-menu pull-left">
-                <li class="active"><a href="Client?action=goHome">Home</a></li>
-                <li><a href="about-us.jsp">About Us</a></li>
-                <li><a href="feedback.jsp">Feedback</a></li>
-            </ul>
+	    </div> <!-- End Container -->
+	</div> <!-- End Top-Navigation -->
 
-            <!-- Search Form -->
-            <form name="form-search" method="post" action="Client?action=search" class="form-search pull-right">
-                <input type="text" name="search" placeholder="Search...." class="input-icon input-icon-search" />
-            </form>
+	<div class="container">
+	    <header id="header" class="clearfix">
 
-        </div> <!-- End Container -->
-    </div> <!-- End Top-Navigation -->
+		<!-- Logo -->
+		<div class="logo pull-left">
+		    <a href="Client?action=goHome"><img src="images/logo.png" alt="Enews" /></a>
+		</div>
 
-    <div class="container">
-        <header id="header" class="clearfix">
+		<!-- Ads -->
+		<div class="ads pull-right">
+		    <img src="images/ads/480x80.png" alt="Ads" />
+		</div>
 
-            <!-- Logo -->
-            <div class="logo pull-left">
-                <a href="Client?action=goHome"><img src="images/logo.png" alt="Enews" /></a>
-            </div>
+	    </header> <!-- End Header -->
 
-            <!-- Ads -->
-            <div class="ads pull-right">
-                <img src="images/ads/480x80.png" alt="Ads" />
-            </div>
-
-        </header> <!-- End Header -->
-
-        <nav id="main-navigation" class="clearfix margin-bottom40">
-            <ul>
-		<c:forEach items="${cateList}" var="item">
-		    <li><a href="Client?action=viewCategory&cateId=${item.categoryId}">${item.title}</a></li>
-		</c:forEach>
-            </ul>
-        </nav> <!-- End Main-Navigation -->
-
-	<div class="row-fluid">
-	    <div id="main" class="span8 single single-post image-preloader">
-
-		<div class="row-fluid">
-
-		    <div class="breadcrumb clearfix">
-			<span class="base">You are here</span>
-			<p><a href="Client?action=goHome">Home</a>&nbsp;&nbsp;&rarr;&nbsp;&nbsp;<a href="Client?action=viewCategory&cateId=${news.category.categoryId}" title="View articles in ${news.category.title}">${news.category.title}</a>&nbsp;&nbsp;&rarr;&nbsp;&nbsp;${news.title}</p>
-		    </div> <!-- End Breadcrumb -->
-
-		    <figure class="head-section">
-			<img src="images/content/full/4.jpg" alt="Image" />
-			<div class="head-section-content">
-			    <h5>By ${news.author}</h5>
-			    <h1>${news.title}</h1>
-			    <p class="meta"><fmt:formatDate pattern="MMM. dd, yyyy" value="${news.postedDate}" />&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Client?action=viewCategory&cateId=${news.category.categoryId}" title="View all posts in ${news.category.title}">${news.category.title}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#comments" title="View all comments">8 comments</a></p>
-			</div>
-		    </figure>
-
-		    <div class="content">
-
-			<p>${news.content}</p>
-
-			<div class="tags">
-			    <strong>Tags:</strong>&nbsp;
-			    <c:forEach items="${tagList}" var="item">
-			    <a href="Client?action=search&search=${item}" title="View posts in ${item}">${item}</a>
-			    </c:forEach>
-			</div> <!-- End Tags -->
-
-		    </div> <!-- End Content -->
-
-		    <div class="sep-border no-margin-bottom"></div> <!-- Separator --><div style="margin-bottom: 25px"></div>
-
-		    <div class="related-posts">
-			<h3>Related Posts</h3>
-
-			<ul class="list-arrow-bold" style="margin-left: 25px">
-			    <c:forEach items="${relatedList}" var="item">
-			    <li style="font-size: 13px; line-height:1.5em;">
-				<a href="Client?action=viewDetail&newsId=${item.newsId}">${item.title}</a>
+	    <nav id="main-navigation" class="clearfix margin-bottom40">
+		<ul>
+		    <c:forEach items="${cateList}" var="item" varStatus="loop">
+			<c:if test="${loop.index <= 8}">
+			    <li><a href="Client?action=viewCategory&cateId=${item.categoryId}">${item.title}<mt:catemenu cateId="${item.categoryId}"/></a>
+			    <mt:subcates cateId="${item.categoryId}"/>
 			    </li>
-			    </c:forEach>
-			</ul>
-		    </div> <!-- End Related-Posts -->
+			</c:if>
+			<c:if test="${loop.index == 9}">
+			    <li><a href="Client?action=viewCategories">More</a></li>
+			</c:if>
+		    </c:forEach>
+		</ul>
+	    </nav> <!-- End Main-Navigation -->
 
-		    <div class="sep-border"></div> <!-- Separator -->
+	    <div class="row-fluid">
+		<div id="main" class="span8 single single-post image-preloader">
 
-		    <div id="comments">
+		    <div class="row-fluid">
 
-			<div class="comment-lists">
+			<div class="breadcrumb clearfix">
+			    <span class="base">You are here</span>
+			    <p><a href="Client?action=goHome">Home</a>&nbsp;&nbsp;&rarr;&nbsp;&nbsp;<a href="Client?action=viewCategory&cateId=${news.category.categoryId}" title="View articles in ${news.category.title}">${news.category.title}</a>&nbsp;&nbsp;&rarr;&nbsp;&nbsp;${news.title}</p>
+			</div> <!-- End Breadcrumb -->
 
-			    <ul>
-				<li> <!-- One -->
-				<figure><img src="images/content/avatar/1.jpg" alt="Avatar 1" /></figure>
-				<div class="content">
-				    <h5><a href="#">Amah Syner Holland</a></h5>
-				    <p class="meta">on Sep 12th, 2012 at 3:05 PM</p>
-				    <span class="comment-id">1</span>
-				    <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum semper nulla vitae diam lobortis interdum varius arcu tincidunt. Quisque sed nisi vel lorem blandit pharetra.</p>
-				</div>
-				</li>
-				<li> <!-- Two -->
-				<figure><img src="images/content/avatar/2.jpg" alt="Avatar 2" /></figure>
-				<div class="content">
-				    <h5><a href="#">Mugiwara Kiwolen</a></h5>
-				    <p class="meta">on Sep 12th, 2012 at 3:05 PM</p>
-				    <span class="comment-id">2</span>
-				    <p class="text">Vivamus mollis blandit elit, nec lobortis tellus laoreet id. Integer sodales, lorem eu pellentesque scelerisque, urna orci lobortis mauris, sed facilisis mi est eu enim.</p>
-				</div>
-				</li>
-				<li> <!-- Eight -->
-				<figure><img src="images/content/avatar/4.jpg" alt="Avatar 8" /></figure>
-				<div class="content">
-				    <h5>Rendy Jagerjack</h5>
-				    <p class="meta">on Sep 12th, 2012 at 3:05 PM</p>
-				    <span class="comment-id">3</span>
-				    <p class="text">Pellentesque sed eros sit amet eros congue dictum. Nullam fringilla adipiscing placerat. Mauris feugiat elit et nisi dapibus sodales. Aenean pulvinar odio non sapien tincidunt pellentesque. Donec ac elit ut mi suscipit mattis. In hac habitasse platea dictumst. Fusce nunc lectus, condimentum id interdum quis, ullamcorper posuere nulla.</p>
-				</div>
-				</li>
+			<figure class="head-section">
+			    <img src="admin/img/news/${news.image}" alt="${news.title}" />
+			    <div class="head-section-content">
+				<h5>By ${news.author}</h5>
+				<h1>${news.title}</h1>
+				<p class="meta"><fmt:formatDate pattern="MMM. dd, yyyy" value="${news.postedDate}" />&nbsp;&nbsp;|&nbsp;&nbsp;<a href="Client?action=viewCategory&cateId=${news.category.categoryId}" title="View all posts in ${news.category.title}">${news.category.title}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#comments" title="View all comments">${fn:length(item.commentCollection)} comments</a></p>
+			    </div>
+			</figure>
+
+			<div class="content">
+
+			    <p>${news.content}</p>
+
+			    <div class="tags">
+				<strong>Tags:</strong>&nbsp;
+				<c:forEach items="${tagList}" var="item">
+				    <a href="Client?action=search&search=${item}" title="View posts in ${item}">${item}</a>
+				</c:forEach>
+			    </div> <!-- End Tags -->
+
+			</div> <!-- End Content -->
+
+			<div class="sep-border no-margin-bottom"></div> <!-- Separator --><div style="margin-bottom: 25px"></div>
+
+			<div class="related-posts">
+			    <h3>Related Posts</h3>
+
+			    <ul class="list-arrow-bold" style="margin-left: 25px">
+				<c:forEach items="${relatedList}" var="item">
+				    <li style="font-size: 13px; line-height:1.5em;">
+					<a href="Client?action=viewDetail&newsId=${item.newsId}">${item.title}</a>
+				    </li>
+				</c:forEach>
 			    </ul>
-			</div> <!-- End Comment-Lists -->
+			</div> <!-- End Related-Posts -->
 
-			<div class="form-comment">
-			    <h4>Leave a Comment</h4>
-			    <textarea name="message"></textarea>
-			    <input type="submit" name="submit" value="Submit Comment" />
-			    </form>
-			</div> <!-- End Form-Comment -->
-		    </div> <!-- End Comments -->
+			<div class="sep-border"></div> <!-- Separator -->
 
-		</div> <!-- End Row-Fluid -->
-	    </div> <!-- End Main -->
+			<div id="comments">
 
-	    <div id="sidebar" class="span4">
+			    <div class="comment-lists">
+
+				<ul>
+				    <li> <!-- One -->
+				    <figure><img src="images/content/avatar/1.jpg" alt="Avatar 1" /></figure>
+				    <div class="content">
+					<h5><a href="#">Amah Syner Holland</a></h5>
+					<p class="meta">on Sep 12th, 2012 at 3:05 PM</p>
+					<span class="comment-id">1</span>
+					<p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum semper nulla vitae diam lobortis interdum varius arcu tincidunt. Quisque sed nisi vel lorem blandit pharetra.</p>
+				    </div>
+				    </li>
+				    <li> <!-- Two -->
+				    <figure><img src="images/content/avatar/2.jpg" alt="Avatar 2" /></figure>
+				    <div class="content">
+					<h5><a href="#">Mugiwara Kiwolen</a></h5>
+					<p class="meta">on Sep 12th, 2012 at 3:05 PM</p>
+					<span class="comment-id">2</span>
+					<p class="text">Vivamus mollis blandit elit, nec lobortis tellus laoreet id. Integer sodales, lorem eu pellentesque scelerisque, urna orci lobortis mauris, sed facilisis mi est eu enim.</p>
+				    </div>
+				    </li>
+				    <li> <!-- Eight -->
+				    <figure><img src="images/content/avatar/4.jpg" alt="Avatar 8" /></figure>
+				    <div class="content">
+					<h5>Rendy Jagerjack</h5>
+					<p class="meta">on Sep 12th, 2012 at 3:05 PM</p>
+					<span class="comment-id">3</span>
+					<p class="text">Pellentesque sed eros sit amet eros congue dictum. Nullam fringilla adipiscing placerat. Mauris feugiat elit et nisi dapibus sodales. Aenean pulvinar odio non sapien tincidunt pellentesque. Donec ac elit ut mi suscipit mattis. In hac habitasse platea dictumst. Fusce nunc lectus, condimentum id interdum quis, ullamcorper posuere nulla.</p>
+				    </div>
+				    </li>
+				</ul>
+			    </div> <!-- End Comment-Lists -->
+
+			    <div class="form-comment">
+				<h4>Leave a Comment</h4>
+				<textarea name="message"></textarea>
+				<input type="submit" name="submit" value="Submit Comment" />
+				</form>
+			    </div> <!-- End Form-Comment -->
+			</div> <!-- End Comments -->
+
+		    </div> <!-- End Row-Fluid -->
+		</div> <!-- End Main -->
+
+		<div id="sidebar" class="span4">
 
 		    <div class="widget clearfix">
 			<div class="enews-tab">
@@ -220,10 +219,10 @@
 				    <c:forEach items="${popularList}" var="item" varStatus="loop">
 					<c:if test="${loop.index < 6}">
 					    <div class="item">
-						<figure class="pull-left"><img src="images/content/300/5.jpg" alt="" /></figure>
+						<figure class="pull-left"><img src="admin/img/news/${item.image}" alt="" /></figure>
 						<div class="pull-right content">
 						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="">${item.title}</a></h4>
-						    <p class="meta">${item.viewed} views&nbsp;&nbsp;|&nbsp;&nbsp;49 comments</p>
+						    <p class="meta">${item.viewed} views&nbsp;&nbsp;|&nbsp;&nbsp;${fn:length(item.commentCollection)} comments</p>
 						</div>
 					    </div>
 					</c:if>
@@ -235,7 +234,7 @@
 				    <c:forEach items="${recentList}" var="item" varStatus="loop">
 					<c:if test="${loop.index < 6}">
 					    <div class="item">
-						<figure class="pull-left"><img src="images/content/300/2.jpg" alt="" /></figure>
+						<figure class="pull-left"><img src="admin/img/news/${item.image}" alt="" /></figure>
 						<div class="pull-right content">
 						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="">${item.title}</a></h4>
 						    <p class="meta">In <a href="#">${item.category.title}</a> on <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></p>
@@ -309,19 +308,19 @@
 
 		</div> <!-- End Sidebar -->
 
-	</div> <!-- End Row-Fluid -->
-    </div> <!-- End Container -->
-
-    <div style="margin-top: 35px" ></div>
-    <div id="footer">
-	<div class="container">
-
-	    <p class="pull-left">Copyright 2013 News Online&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved&nbsp;&nbsp;|&nbsp;&nbsp;FPT-Aptech</p>
-
+	    </div> <!-- End Row-Fluid -->
 	</div> <!-- End Container -->
-    </div> <!-- End Footer -->
 
-    <a href="#" class="scrollup" title="Back to Top!">Scroll</a>
+	<div style="margin-top: 35px" ></div>
+	<div id="footer">
+	    <div class="container">
 
-</body>
+		<p class="pull-left">Copyright 2013 News Online&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved&nbsp;&nbsp;|&nbsp;&nbsp;FPT-Aptech</p>
+
+	    </div> <!-- End Container -->
+	</div> <!-- End Footer -->
+
+	<a href="#" class="scrollup" title="Back to Top!">Scroll</a>
+
+    </body>
 </html>

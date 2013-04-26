@@ -11,146 +11,148 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<head>
+<html>
+    <head>
 
-    <!-- Your Basic Site Informations -->
-    <title>News By ${parentCategory}</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <meta name="description" content="Enews is a news or magazine site template that built with very cool responsive template with clean design, fast load, seo friendly, beauty color and a slew of features." />
-    <meta name="keywords" content="Site Template, News, Magazine, Portofolio, HTML, CSS, jQuery, Newsletter, PHP Contact, Subscription, Responsive, Marketing, Clean, SEO" />
-    <meta name="author" content="Dots Theme" />
+	<!-- Your Basic Site Informations -->
+	<title>News By ${parentCategory}</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="description" content="Enews is a news or magazine site template that built with very cool responsive template with clean design, fast load, seo friendly, beauty color and a slew of features." />
+	<meta name="keywords" content="Site Template, News, Magazine, Portofolio, HTML, CSS, jQuery, Newsletter, PHP Contact, Subscription, Responsive, Marketing, Clean, SEO" />
+	<meta name="author" content="Dots Theme" />
 
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="css/flexslider.css">
-    <link rel="stylesheet" href="css/prettyPhoto.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="css/Oswald.css" rel='stylesheet' type='text/css'>
-    <link href="css/Bitter.css" rel='stylesheet' type='text/css'>
-    <link href="css/Open_Sans.css" rel='stylesheet' type='text/css'>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="css/prettyPhoto.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href="css/Oswald.css" rel='stylesheet' type='text/css'>
+	<link href="css/Bitter.css" rel='stylesheet' type='text/css'>
+	<link href="css/Open_Sans.css" rel='stylesheet' type='text/css'>
 
-<noscript><link rel="stylesheet" href="css/no-js.css"></noscript> <!-- If JavaScript Disabled -->
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
-<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+	<!-- JavaScript -->
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script type='text/javascript' src='js/bootstrap.min.js'></script>
+	<script type='text/javascript' src='js/jquery.easing.js'></script>
+	<script type='text/javascript' src='js/jquery.flexslider-min.js'></script>
+	<script type='text/javascript' src='js/jflickrfeed.min.js'></script>
+	<script type='text/javascript' src='js/jquery.fitvids.min.js'></script>
+	<script type='text/javascript' src='js/jquery.lazyload.mini.js'></script>
+	<script type='text/javascript' src='js/jquery.prettyPhoto.js'></script>
+	<script type='text/javascript' src='js/jquery.placeholder.min.js'></script>
+	<script type='text/javascript' src='js/jquery.jticker.js'></script>
+	<script type='text/javascript' src='js/jquery.mobilemenu.js'></script>
+	<script type='text/javascript' src='js/jquery.isotope.min.js'></script>
+	<script type='text/javascript' src='js/jquery.hoverdir.js'></script>
+	<script type='text/javascript' src='js/modernizr.custom.js'></script>
+	<script type="text/javascript" src="js/main.js"></script>
 
-<!-- Favicons -->
-<link rel="shortcut icon" href="images/favicon.ico">
-<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    </head>
 
-<!-- JavaScript -->
-<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type='text/javascript' src='js/bootstrap.min.js'></script>
-<script type='text/javascript' src='js/jquery.easing.js'></script>
-<script type='text/javascript' src='js/jquery.flexslider-min.js'></script>
-<script type='text/javascript' src='js/jflickrfeed.min.js'></script>
-<script type='text/javascript' src='js/jquery.fitvids.min.js'></script>
-<script type='text/javascript' src='js/jquery.lazyload.mini.js'></script>
-<script type='text/javascript' src='js/jquery.prettyPhoto.js'></script>
-<script type='text/javascript' src='js/jquery.placeholder.min.js'></script>
-<script type='text/javascript' src='js/jquery.jticker.js'></script>
-<script type='text/javascript' src='js/jquery.mobilemenu.js'></script>
-<script type='text/javascript' src='js/jquery.isotope.min.js'></script>
-<script type='text/javascript' src='js/jquery.hoverdir.js'></script>
-<script type='text/javascript' src='js/modernizr.custom.js'></script>
-<script type="text/javascript" src="js/main.js"></script>
+    <body>
 
-</head>
+	<div id="top-navigation">
+	    <div class="container">
 
-<body>
+		<!-- Navigation -->
+		<ul class="nav-menu pull-left">
+		    <li class="active"><a href="Client?action=goHome">Home</a></li>
+		    <li><a href="Client?action=aboutus">About Us</a></li>
+		    <li><a href="Client?action=support">Support</a></li>
+		</ul>
 
-    <div id="top-navigation">
+		<!-- Search Form -->
+		<form name="form-search" method="post" action="Client?action=search" class="form-search pull-right">
+		    <input type="text" name="search" placeholder="Search...." class="input-icon input-icon-search" />
+		</form>
+
+	    </div> <!-- End Container -->
+	</div> <!-- End Top-Navigation -->
+
 	<div class="container">
+	    <header id="header" class="clearfix">
 
-            <!-- Navigation -->
-            <ul class="nav-menu pull-left">
-                <li class="active"><a href="Client?action=goHome">Home</a></li>
-                <li><a href="about-us.jsp">About Us</a></li>
-                <li><a href="feedback.jsp">Feedback</a></li>
-            </ul>
+		<!-- Logo -->
+		<div class="logo pull-left">
+		    <a href="Client?action=goHome"><img src="images/logo.png" alt="Enews" /></a>
+		</div>
 
-            <!-- Search Form -->
-            <form name="form-search" method="post" action="Client?action=search" class="form-search pull-right">
-                <input type="text" name="search" placeholder="Search...." class="input-icon input-icon-search" />
-            </form>
+		<!-- Ads -->
+		<div class="ads pull-right">
+		    <img src="images/ads/480x80.png" alt="Ads" />
+		</div>
 
-        </div> <!-- End Container -->
-    </div> <!-- End Top-Navigation -->
+	    </header> <!-- End Header -->
 
-    <div class="container">
-	<header id="header" class="clearfix">
+	    <nav id="main-navigation" class="clearfix margin-bottom40">
+		<ul>
+		    <c:forEach items="${cateList}" var="item" varStatus="loop">
+			<c:if test="${loop.index <= 8}">
+			    <li><a href="Client?action=viewCategory&cateId=${item.categoryId}">${item.title}<mt:catemenu cateId="${item.categoryId}"/></a>
+			    <mt:subcates cateId="${item.categoryId}"/>
+			    </li>
+			</c:if>
+			<c:if test="${loop.index == 9}">
+			    <li><a href="Client?action=viewCategories">More</a></li>
+			</c:if>
+		    </c:forEach>
+		</ul>
+	    </nav> <!-- End Main-Navigation -->
 
-	    <!-- Logo -->
-	    <div class="logo pull-left">
-		<a href="Client?action=goHome"><img src="images/logo.png" alt="Enews" /></a>
-	    </div>
+	    <div class="row-fluid">
+		<div id="main" class="span8 portofolio portofolio-one blog-posts image-preloader">
 
-	    <!-- Ads -->
-	    <div class="ads pull-right">
-		<img src="images/ads/480x80.png" alt="Ads" />
-	    </div>
+		    <div class="breadcrumb clearfix">
+			<span class="base">You are here</span>
+			<p><a href="Client?action=goHome">Home</a>&nbsp;&nbsp;&rarr;&nbsp;&nbsp;${parentCategory}</p>
+		    </div> <!-- End Breadcrumb -->
 
-	</header> <!-- End Header -->
+		    <div class="row-fluid margin-top40">
 
-	<nav id="main-navigation" class="clearfix margin-bottom40">
-	    <ul>
-		<c:forEach items="${cateList}" var="item">
-		    <li><a href="Client?action=viewCategory&cateId=${item.categoryId}">${item.title}</a></li>
-		</c:forEach>
-	    </ul>
-	</nav> <!-- End Main-Navigation -->
+			<ul class="portofolio-filter">
+			    <li><a href="#" class="current active" data-filter="*">All</a></li>
+			    <c:forEach items="${subList}" var="item">
+				<li><a href="#" data-filter=".${fn:toLowerCase(fn:replace(item.title, ' ', '-'))}">${item.title}</a></li>
+			    </c:forEach>
+			</ul> <!-- End Portofolio-Filter -->
 
-	<div class="row-fluid">
-	    <div id="main" class="span8 portofolio portofolio-one blog-posts image-preloader">
+			<div class="portofolio-items">
 
-		<div class="breadcrumb clearfix">
-		    <span class="base">You are here</span>
-		    <p><a href="Client?action=goHome">Home</a>&nbsp;&nbsp;&rarr;&nbsp;&nbsp;${parentCategory}</p>
-		</div> <!-- End Breadcrumb -->
-
-		<div class="row-fluid margin-top40">
-
-		    <ul class="portofolio-filter">
-			<li><a href="#" class="current active" data-filter="*">All</a></li>
-			<c:forEach items="${subList}" var="item">
-			<li><a href="#" data-filter=".${fn:toLowerCase(fn:replace(item.title, ' ', '-'))}">${item.title}</a></li>
-			</c:forEach>
-		    </ul> <!-- End Portofolio-Filter -->
-
-		    <div class="portofolio-items">
-
-			<c:forEach items="${newsList}" var="item">
-			<div style="width: 100%" class="post clearfix ${fn:toLowerCase(fn:replace(item.category.title, ' ', '-'))}"> <!-- One -->
-			    <figure>
-				<img src="images/content/300/1.jpg" alt="Post 1" />
-				<div class="cat-name">
-				    <span class="base">${item.category.title}</span>
+			    <c:forEach items="${newsList}" var="item">
+				<div style="width: 100%" class="post clearfix ${fn:toLowerCase(fn:replace(item.category.title, ' ', '-'))}"> <!-- One -->
+				    <figure>
+					<img src="images/content/300/1.jpg" alt="Post 1" />
+					<div class="cat-name">
+					    <span class="base">${item.category.title}</span>
+					</div>
+				    </figure>
+				    <div class="content">
+					<h2><a href="Client?action=viewDetail&newsId=${item.newsId}" title="View permalink ${item.title}">${item.title}</a></h2>
+					<div style="width: 460px"><p>${item.description}</p></div>
+				    </div>
+				    <div class="meta">
+					<span style="color: black" class="pull-left">By ${item.author} - <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></span>
+					<span class="pull-right"><a href="Client?action=viewDetail&newsId=${item.newsId}">Readmore...</a></span>
+				    </div>
 				</div>
-			    </figure>
-			    <div class="content">
-				<h2><a href="Client?action=viewDetail&newsId=${item.newsId}" title="View permalink ${item.title}">${item.title}</a></h2>
-				<div style="width: 460px"><p>${item.description}</p></div>
-			    </div>
-			    <div class="meta">
-				<span style="color: black" class="pull-left">By ${item.author} - <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></span>
-				<span class="pull-right"><a href="Client?action=viewDetail&newsId=${item.newsId}">Readmore...</a></span>
-			    </div>
-			</div>
-			</c:forEach>
+			    </c:forEach>
 
-		    </div> <!-- End Portofolio-Items -->
+			</div> <!-- End Portofolio-Items -->
 
-		</div> <!-- End Row-Fluid -->
-	    </div> <!-- End Main -->
+		    </div> <!-- End Row-Fluid -->
+		</div> <!-- End Main -->
 
-	    <div id="sidebar" class="span4">
+		<div id="sidebar" class="span4">
 
 		    <div class="widget clearfix">
 			<div class="enews-tab">
@@ -257,19 +259,19 @@
 
 		</div> <!-- End Sidebar -->
 
-	</div> <!-- End Row-Fluid -->
-    </div> <!-- End Container -->
-
-    <div style="margin-top: 35px" ></div>
-    <div id="footer">
-	<div class="container">
-
-	    <p class="pull-left">Copyright 2013 News Online&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved&nbsp;&nbsp;|&nbsp;&nbsp;FPT-Aptech</p>
-
+	    </div> <!-- End Row-Fluid -->
 	</div> <!-- End Container -->
-    </div> <!-- End Footer -->
 
-    <a href="#" class="scrollup" title="Back to Top!">Scroll</a>
+	<div style="margin-top: 35px" ></div>
+	<div id="footer">
+	    <div class="container">
 
-</body>
+		<p class="pull-left">Copyright 2013 News Online&nbsp;&nbsp;|&nbsp;&nbsp;All Rights Reserved&nbsp;&nbsp;|&nbsp;&nbsp;FPT-Aptech</p>
+
+	    </div> <!-- End Container -->
+	</div> <!-- End Footer -->
+
+	<a href="#" class="scrollup" title="Back to Top!">Scroll</a>
+
+    </body>
 </html>

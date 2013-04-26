@@ -1,10 +1,13 @@
 <%-- 
-    Document   : 404
-    Created on : Apr 22, 2013, 3:20:17 PM
+    Document   : feedback
+    Created on : Apr 25, 2013, 10:06:30 AM
     Author     : Khatmau_sr
 --%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<%@page import="web.entity.Users"%>
+<%@taglib uri="/WEB-INF/tlds/myTag" prefix="mt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,7 +17,7 @@
     <head>
 
 	<!-- Your Basic Site Informations -->
-	<title>Search Not Found</title>
+	<title>Feedback</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="description" content="Enews is a news or magazine site template that built with very cool responsive template with clean design, fast load, seo friendly, beauty color and a slew of features." />
 	<meta name="keywords" content="Site Template, News, Magazine, Portofolio, HTML, CSS, jQuery, Newsletter, PHP Contact, Subscription, Responsive, Marketing, Clean, SEO" />
@@ -33,6 +36,7 @@
 	<link href="css/Bitter.css" rel='stylesheet' type='text/css'>
 	<link href="css/Open_Sans.css" rel='stylesheet' type='text/css'>
 
+	<!-- Favicons -->
 	<link rel="shortcut icon" href="images/favicon.ico">
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
@@ -50,11 +54,51 @@
 	<script type='text/javascript' src='js/jquery.placeholder.min.js'></script>
 	<script type='text/javascript' src='js/jquery.jticker.js'></script>
 	<script type='text/javascript' src='js/jquery.mobilemenu.js'></script>
-	<script type='text/javascript' src='js/jquery.hoverdir.js'></script>
 	<script type='text/javascript' src='js/jquery.isotope.min.js'></script>
+	<script type='text/javascript' src='js/jquery.hoverdir.js'></script>
 	<script type='text/javascript' src='js/modernizr.custom.js'></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript">
 
+	    function trim (str) {
+		str = str.replace(/^\s+/, '');
+		for (var i = str.length - 1; i >= 0; i--) {
+		    if (/\S/.test(str.charAt(i))) {
+			str = str.substring(0, i + 1);
+			break;
+		    }
+		}
+		return str;
+	    }
+	    function validateEmail(email) {
+
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	    }
+
+	    function validate(){
+		if(trim(myform.name.value).length<5){
+		    alert("Name must be at least 5 words!");
+		    return false;
+		}
+		else{
+		    if(!validateEmail(myform.email.value)){
+			alert("Email is not valid!");
+			return false;
+		    }
+		    else{
+			if(trim(myform.message.value).length<20){
+			    alert("Message must be at least 20 words!");
+			    return false;
+			}
+			else{
+			    return true;
+			}
+
+		    }
+		}
+	    }
+	</script>
     </head>
 
     <body>
@@ -97,7 +141,7 @@
 		    <c:forEach items="${cateList}" var="item" varStatus="loop">
 			<c:if test="${loop.index <= 8}">
 			    <li><a href="Client?action=viewCategory&cateId=${item.categoryId}">${item.title}<mt:catemenu cateId="${item.categoryId}"/></a>
-			    <mt:subcates cateId="${item.categoryId}"/>
+				<mt:subcates cateId="${item.categoryId}"/>
 			    </li>
 			</c:if>
 			<c:if test="${loop.index == 9}">
@@ -108,28 +152,47 @@
 	    </nav> <!-- End Main-Navigation -->
 
 	    <div class="row-fluid">
-		<div id="main" class="span8 blog-posts search-page image-preloader">
+		<div id="main" class="span8 page contact-page image-preloader">
 
 		    <div class="row-fluid">
+			<div id="main" class="span8 blog-posts search-page image-preloader" style="width: 100%">
+			    <div class="row-fluid">
+				<h2>Recent questions</h2>
+				<div class="sep-border margin-bottom20"></div> <!-- Separator -->
+				<c:forEach items="${comList}" var="item">
+				    <div class="post clearfix">
+					<div class="content">
+					    <h2>${item.question}</h2>
+					    <p>
+						<c:if test="${item.answer eq '' || empty item.answer}">
+					    Not be answered yet!
+						</c:if>
+						${item.answer }
+					    </p>
+					</div>
+					<div class="meta">
+					    <span class="pull-left">Asked by <font color="black">${item.name}</font> - <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedTime}" /></span>
+					    <c:if test="${not empty item.users.username}">
+						<span class="pull-right">By <font color="black">${item.users.username}</font></span>
+					    </c:if>
+					</div>
+				    </div>
+				</c:forEach>
+			    </div>
+			</div>
+			<h2>Send me your Question</h2>
+			<p>Required fields are marked *</p>
 
-			<!-- Search Results -->
-			<h2>Search Results for “<i>${search}</i>”</h2>
-			<form name="form-search" method="post" action="Client">
-			    <input type="text" name="search" value="${search}" />
-			    <input type="submit" name="action" value="Search" />
+			<form id="myform" method="post" action="Client" onsubmit="return validate()">
+			    <label>Name <span class="font-required">*</span></label>
+			    <input type="text" name="name" maxlength="20" />
+			    <label>Email <span class="font-required">*</span></label>
+			    <input type="text" name="email" maxlength="50" />
+			    <label>Message <span class="font-required">*</span></label>
+			    <textarea name="message" maxlength="255"></textarea>
+			    <input type="submit" name="action" value="Send Message" />
+
 			</form>
-			<p class="search-info">Displaying results 0 of <i>0</i></p>
-
-			<div class="sep-border margin-bottom20"></div> <!-- Separator -->
-
-			<h4>Page Not Found for "<span class="font-required">${search}</span>"</h4>
-			<p class="label label-important">Please try again with some different keywords.</p><br><br>
-			<p>You might want to consider some of our suggestions to get better results:</p>
-			<ul style="margin-left: 17px">
-			    <li>Check your spelling.</li>
-			    <li>Try a similar keyword, for example: tablet instead of laptop.</li>
-			    <li>Try using more than one keyword.</li>
-			</ul>
 
 		    </div> <!-- End Row-Fluid -->
 		</div> <!-- End Main -->
@@ -152,10 +215,10 @@
 				    <c:forEach items="${popularList}" var="item" varStatus="loop">
 					<c:if test="${loop.index < 6}">
 					    <div class="item">
-						<figure class="pull-left"><img src="images/content/300/5.jpg" alt="" /></figure>
+						<figure class="pull-left"><img src="images/content/300/5.jpg" alt="${item.title}" /></figure>
 						<div class="pull-right content">
-						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="">${item.title}</a></h4>
-						    <p class="meta">${item.viewed} views&nbsp;&nbsp;|&nbsp;&nbsp;49 comments</p>
+						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="${item.title}">${item.title}</a></h4>
+						    <p class="meta">${item.viewed} views&nbsp;&nbsp;|&nbsp;&nbsp;0 comments</p>
 						</div>
 					    </div>
 					</c:if>
@@ -167,9 +230,9 @@
 				    <c:forEach items="${recentList}" var="item" varStatus="loop">
 					<c:if test="${loop.index < 6}">
 					    <div class="item">
-						<figure class="pull-left"><img src="images/content/300/2.jpg" alt="" /></figure>
+						<figure class="pull-left"><img src="images/content/300/2.jpg" alt="${item.title}" /></figure>
 						<div class="pull-right content">
-						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="">${item.title}</a></h4>
+						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="${item.title}">${item.title}</a></h4>
 						    <p class="meta">In <a href="#">${item.category.title}</a> on <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></p>
 						</div>
 					    </div>
@@ -199,25 +262,26 @@
 				<h4>Login Form</h4>
 			    </div>
 			    <div class="content">
-				<form id="enews-contact-form" method="post" action="#">
-				    <table style="margin-left: 5px">
-					<tr>
-					    <td><input type="text" name="n" maxlength="20" placeholder="Username"/></td>
-					</tr>
-					<tr>
-					    <td><input type="password" style="width: 206px; height: 35px;
-						       -webkit-border-radius: 0px;-moz-border-radius: 0px;
-						       -border-radius: 0px;border:1px solid #DBDBDB;
-						       font-size: 15px" name="p" maxlength="20" placeholder="Password"/></td>
-					</tr>
-					<tr>
-					    <td>
-						<input type="submit" name="submit" value="Submit" class="btn btn-small" />
-						<input type="submit" name="submit" value="Register" class="btn btn-small" />
-					    </td>
-					</tr>
-				    </table>
-				</form>
+				<form action="Client" name="loginform">
+                                    <%
+						Users u = (Users) session.getAttribute("curUser");
+						if (u == null) {
+                                    %>
+                                    Username :<input type="text" name="username" id="lgusername"/><br>
+                                    Password :<input type="password" name="password" id="lgpassword" /><br>
+                                    <input type="submit" name="action" value="Login" onclick="return validate();"/><br>
+                                    <input type="submit" name="action" value="Register A New Account"/><br>
+                                    <%} else {
+											String username = u.getUsername();
+											String lastLogin = (String) session.getAttribute("lastLogin");
+
+                                    %>
+
+                                    <a href="profile.jsp"><%=username%></a><br>
+				    <%if (lastLogin != null) {%>Last Login : <%=lastLogin%><%}%><br>
+                                    <a href="changepassword.jsp">Change Password</a><br>
+                                    <%}%>
+                                </form>
 			    </div>
 			</div>
 		    </div> <!-- End Widget -->
