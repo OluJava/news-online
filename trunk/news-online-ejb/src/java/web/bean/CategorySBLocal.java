@@ -22,4 +22,16 @@ public interface CategorySBLocal {
 
     Category getCategoryById(int id);
 
+    List<Category> getCategoryByStatus(boolean status);
+
+    boolean checkInsert(String title);
+
+    boolean checkUpdate(int cateId, String title);
+
+    void insert(Category cate);
+
+    void update(Category cate);
+
+    void delete(Category cate);
+
 }

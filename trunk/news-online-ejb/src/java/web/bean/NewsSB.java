@@ -62,7 +62,14 @@ public class NewsSB implements NewsSBLocal {
 	return q.getResultList();
     }
 
-    public List<News> getNews(String title) {
+    public List<News> getNewsUpdate(int newsId, String title) {
+	Query q = em.createQuery("SELECT n FROM News n WHERE n.title = :title AND n.newsId <> :newsId");
+	q.setParameter("title", title);
+	q.setParameter("newsId", newsId);
+	return q.getResultList();
+    }
+
+    public List<News> getNewsInsert(String title) {
 	Query q = em.createNamedQuery("News.findByTitle");
 	q.setParameter("title", title);
 	return q.getResultList();

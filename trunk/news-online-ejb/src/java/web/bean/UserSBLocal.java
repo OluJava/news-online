@@ -5,7 +5,9 @@
 
 package web.bean;
 
+import java.util.List;
 import javax.ejb.Local;
+import web.entity.Category;
 import web.entity.Users;
 
 /**
@@ -16,5 +18,31 @@ import web.entity.Users;
 public interface UserSBLocal {
 
     Users getUserById(int userId);
+     boolean insert(String username, String password, String image, String fullname, String birthday, boolean gender, String address, String phone, String email, String question, String answer, String roles, int categoryid, boolean activesms, boolean status);
 
+    boolean update(int userid, String image, String fullname, String birthday, boolean gender, String address, String phone, String email, String role, int categoryid, boolean activesms);
+
+    Users getUser(int userId);
+
+    boolean delete(int userId);
+
+    Users login(String username, String password);
+
+    boolean changePassword(int userId, String newpassword);
+
+    String getLastLogin(int userId);
+
+    void Block(int userId, boolean flag);
+
+    void setLastLogin(int userId);
+
+    Category getCategoryById(int id);
+
+    List<Category> getCategories();
+
+    boolean checkInsert(String username, String email, String img);
+
+    List<Category> getSubCategories(String parentCategoryId);
+
+    Users getUserByName(String username);
 }

@@ -26,12 +26,14 @@ public interface NewsSBLocal {
 
     List<News> getNewsByTitle(String title);
 
-    List<News> getNews(String title);
+    List<News> getNewsUpdate(int newsId, String title);
 
     void insert(News news);
 
     void update(News news);
 
     void delete(News news);
+
+    List<News> getNewsInsert(String title);
 
 }
