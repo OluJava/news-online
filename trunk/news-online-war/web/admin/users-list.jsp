@@ -1,27 +1,29 @@
 <%-- 
-    Document   : news-popular
-    Created on : Apr 23, 2013, 3:19:17 PM
+    Document   : news-list
+    Created on : Apr 22, 2013, 5:34:26 PM
     Author     : Khatmau_sr
 --%>
+
 <%@page import="web.entity.Users"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>News Popular | NewsOnline Admin</title>
+	<title>News | NewsOnline Admin</title>
 	<link rel="stylesheet" type="text/css" href="admin/css/reset.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/text.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/grid.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/layout.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="admin/css/nav.css" media="screen" />
-	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="admin/css/ie6.css" media="screen" /><![endif]-->
-	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="admin/css/ie.css" media="screen" /><![endif]-->
-	<link href="admin/css/table/demo_page.css" rel="stylesheet" type="text/css" />
+	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
+	<link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
 	<!-- BEGIN: load jquery -->
 	<script src="admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
-	<script src="admin/js/jquery-ui/jquery.ui.core.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="admin/js/jquery-ui/jquery.ui.core.min.js"></script>
 	<script src="admin/js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
 	<script src="admin/js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
 	<script src="admin/js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
@@ -44,8 +46,7 @@
 	    });
 	</script>
     </head>
-    <body>
-	<%
+    <body><%
                     Users u = (Users) session.getAttribute("curUser");
                     String username = u.getUsername();
         %>
@@ -53,10 +54,10 @@
 	    <div class="grid_12 header-repeat">
 		<div id="branding">
 		    <div class="floatleft">
-			<img src="admin/img/logo.png" alt="Logo" /></div>
+			<img src="img/logo.png" alt="Logo" /></div>
 		    <div class="floatright">
 			<div class="floatleft">
-			    <img src="admin/img/img-profile.jpg" alt="Profile Pic" /></div>
+			    <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
 			<div class="floatleft marginleft10">
 			    <ul class="inline-ul floatleft">
 				<li>Hello <%=username%></li>
@@ -121,88 +122,57 @@
 	    <div class="grid_10">
 		<div class="box round first grid">
 		    <h2>
-			Popular News</h2>
+			News List</h2>
 		    <div class="block">
-			<form action="/news-online-war/Admin" method="POST">
-			    <table class="form">
-				<tr>
-				    <td width="150px">The Main News</td>
-				    <td class="col2">
-					<select style="width: 289px" name="news1">
-					    <c:forEach items="${newsList}" var="item">
-						<c:choose>
-						    <c:when test="${cur_List[0] == item.newsId}">
-							<option selected value="${item.newsId}">${item.title}</option>
-						    </c:when>
-						    <c:otherwise>
-							<option value="${item.newsId}">${item.title}</option>
-						    </c:otherwise>
-						</c:choose>
-					    </c:forEach>
-					</select>
-				    </td>
-				</tr>
-				<tr>
-				    <td>The first News</td>
-				    <td>
-					<select style="width: 290px" name="news2">
-					    <c:forEach items="${newsList}" var="item">
-						<c:choose>
-						    <c:when test="${cur_List[1] == item.newsId}">
-							<option selected value="${item.newsId}">${item.title}</option>
-						    </c:when>
-						    <c:otherwise>
-							<option value="${item.newsId}">${item.title}</option>
-						    </c:otherwise>
-						</c:choose>
-					    </c:forEach>
-					</select>
-				    </td>
-				</tr>
-				<tr>
-				    <td>The second News</td>
-				    <td>
-					<select  style="width: 290px" name="news3">
-					    <c:forEach items="${newsList}" var="item">
-						<c:choose>
-						    <c:when test="${cur_List[2] == item.newsId}">
-							<option selected value="${item.newsId}">${item.title}</option>
-						    </c:when>
-						    <c:otherwise>
-							<option value="${item.newsId}">${item.title}</option>
-						    </c:otherwise>
-						</c:choose>
-					    </c:forEach>
-					</select>
-				    </td>
-				</tr>
-				<tr>
-				    <td>The thirth News</td>
-				    <td>
-					<select style="width: 290px" name="news4">
-					    <c:forEach items="${newsList}" var="item">
-						<c:choose>
-						    <c:when test="${cur_List[3] == item.newsId}">
-							<option selected value="${item.newsId}">${item.title}</option>
-						    </c:when>
-						    <c:otherwise>
-							<option value="${item.newsId}">${item.title}</option>
-						    </c:otherwise>
-						</c:choose>
-					    </c:forEach>
-					</select>
-				    </td>
-				</tr>
-				<tr>
-				    <td></td>
-				    <td>
-					<div style="margin-top: 25px">
-					    <button type="submit" name="action" value="Accept" class="btn-icon btn-grey btn-check"><span></span>Accept</button>
-					</div>
-				    </td>
-				</tr>
-			    </table>
-			</form>
+                    <form action="/news-online-war/Admin" onsubmit="changerole()">
+                        <input type="hidden" name="action" value="changerole"/>
+                        <select style="width: 150px" name="role" onchange="this.form.submit()">
+                                <option value="All" <c:if test="${selectedRole == 'All'}">selected</c:if>>--All--</option>
+                                <option value="Employee" <c:if test="${selectedRole == 'Employee'}">selected</c:if>>Employee</option>
+                                <option value="User"<c:if test="${selectedRole == 'User'}">selected</c:if>>User</option>
+                            </select>
+                        </form>
+                        <table class="data display datatable" id="example">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Username</th>
+                                    <th>Birthday</th>
+                                    <th>Gender</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Edit</th>
+                                    <th>Block</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${userList}" var="item">
+                                    <tr class="gradeA">
+                                        <td>${item.fullName}</td>
+                                        <td>${item.username}</td>
+                                        <td>${item.birthday}</td>
+                                        <td>
+                                            <c:if test="${item.gender}">Male</c:if>
+                                            <c:if test="${!item.gender}">Female</c:if>
+                                        </td>
+                                        <td>${item.phone}</td>
+                                        <td>${item.email}</td>
+                                        <td>${item.roles}</td>
+                                        <td align="center">
+                                            <a href="/news-online-war/Admin?action=users-edit&userId=${item.userId}">
+                                                <img src="admin/img/edit.png" alt="Edit User"/>
+                                            </a>
+                                        </td>
+                                        <td align="center">
+                                            <a href="/news-online-war/Admin?action=block&userId=${item.userId}">
+                                                <img src="admin/img/trash.png" alt="Block User"/>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
 		    </div>
 		</div>
 	    </div>
@@ -213,7 +183,7 @@
 	</div>
 	<div id="site_info">
 	    <p>
-		Copyright <a href="#">NewsOnline Admin</a>. All Rights Reserved.
+		Copyright <a href="/news-online-war/Admin?action=index">NewsOnline Admin</a>. All Rights Reserved.
 	    </p>
 	</div>
     </body>
