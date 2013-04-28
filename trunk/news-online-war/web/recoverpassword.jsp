@@ -63,6 +63,24 @@
     <script type="text/javascript" src="js/eye.js"></script>
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/layout.js?ver=1.0.2"></script>
+    <script language="javascript">
+        function validate() {
+            var rexuser= /^[a-zA-Z0-9._-]{6,}$/;
+            if(!rexuser.test(document.recover.username.value))
+            {
+                alert ('Username Must Be A-Z, 0-9 And Length Must Be At Least 6');
+                recover.username.focus();
+                return false;
+            }
+            if(document.recover.answer.value  == '')
+            {
+                alert('Answer Can Not Be Blank');
+                recover.answer.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
    </head>
 
 <body>
@@ -132,8 +150,36 @@
             <div id="main" class="span8 page image-preloader">
 
                 <div class="row-fluid">
-                 <%String m = (String)request.getAttribute("message");if(m!=null){%><label><b>${message}</b></label><br><%}%>
-                    <%String m1 = (String)request.getAttribute("message1");if(m1!=null){%><label><b>${message1}</b></label><br><%}%>
+                 <form method="post" action="Client" name="recover">
+                        <table style="margin-left: 5px">
+                            <tr><td><label>Username :</label></td>
+                                <td><input type="text" name="username" maxlength="20" placeholder="Username" id="username"/></td>
+                            </tr>
+                            <tr><td><label>Secret Question :</label></td>
+                                <td>
+                                    <select style="width: 205px" name="question" id="question">
+                                        <option value="What's Your Hobby ?" selected>What's Your Hobby ?</option>
+                                        <option value="What's Your High School Name ?">What's Your High School Name ?</option>
+                                        <option value="What's Your Pet Name ?">What's Your Pet Name ?</option>
+                                        <option value="What's Your Secondary School Name ?">What's Your Secondary School Name ?</option>
+                                        <option value="What Will You Want To Be ?">What Will You Want To Be ?</option>
+                                        <option value="Which Country Had You Visited ?">Which Country Had You Visited ?</option>
+                                        <option value="What's Your College Name ?">What's Your College Name ?</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Secret Answer :</label></td>
+                                <td><input type="text" name="answer" maxlength="20" placeholder="Answer" id="answer"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" name="action" value="Next" class="btn btn-small" onclick="return validate();" />
+                                    <input type="button" onclick="history.go(-1);" value="Cancel" class="btn btn-small"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div> <!-- End Row-Fluid -->
             </div> <!-- End Main -->
 

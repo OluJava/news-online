@@ -1,4 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> %>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -7,7 +10,7 @@
     <head>
 
         <!-- Your Basic Site Informations -->
-        <title>Enews Responsive News Template</title>
+        <title>Change password</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
         <meta name="description" content="Enews is a news or magazine site template that built with very cool responsive template with clean design, fast load, seo friendly, beauty color and a slew of features." />
         <meta name="keywords" content="Site Template, News, Magazine, Portofolio, HTML, CSS, jQuery, Newsletter, PHP Contact, Subscription, Responsive, Marketing, Clean, SEO" />
@@ -63,7 +66,36 @@
     <script type="text/javascript" src="js/eye.js"></script>
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/layout.js?ver=1.0.2"></script>
-   </head>
+    <script language="javascript">
+        function validate() {
+            if(document.reloginform.oldpassword.value  == '')
+            {
+                alert('Old Password Can Not Be Blank');
+                reloginform.oldpassword.focus();
+                return false;
+            }
+            if(document.reloginform.password.value  == '')
+            {
+                alert('Password Can Not Be Blank');
+                reloginform.password.focus();
+                return false;
+            }
+            if(document.reloginform.confirmpassword.value  == '')
+            {
+                alert('Confirm Password Can Not Be Blank');
+                reloginform.confirmpassword.focus();
+                return false;
+            }
+            if(document.reloginform.password.value  != document.reloginform.confirmpassword.value)
+            {
+                alert('Password And Confirm Password Are Not Match !');
+                reloginform.confirmpassword.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
 
 <body>
 
@@ -101,39 +133,46 @@
 
         <nav id="main-navigation" class="clearfix margin-bottom40">
             <ul>
-                <li><a href="blog_posts.html">Business</a></li>
-                <li><a href="blog_posts.html">Technology</a></li>
-                <li><a href="blog_posts.html">Education</a></li>
-                <li><a href="blog_posts.html">Entertainment</a></li>
-                <li><a href="blog_photos.html">Photo <i class="arrow-main-nav"></i></a>
-                    <ul>
-                        <li><a href="single_photo.html">Single Photo</a></li>
-                    </ul>
-                </li>
-                <li><a href="blog_videos.html">Video <i class="arrow-main-nav"></i></a>
-                    <ul>
-                        <li><a href="single_video.html">Single Video</a></li>
-                    </ul>
-                </li>
-                <li><a href="blog_musics.html">Music <i class="arrow-main-nav"></i></a>
-                    <ul>
-                        <li><a href="single_music.html">Single Music</a></li>
-                    </ul>
-                </li>
-                <li><a href="blog_reviews.html">Review <i class="arrow-main-nav"></i></a>
-                    <ul>
-                        <li><a href="single_review.html">Single Review</a></li>
-                    </ul>
-                </li>
-            </ul>
+		<c:forEach items="${cateList}" var="item" varStatus="loop">
+		    <c:if test="${loop.index <= 8}">
+			<li><a href="Client?action=viewCategory&cateId=${item.categoryId}">${item.title}<mt:catemenu cateId="${item.categoryId}"/></a>
+			<mt:subcates cateId="${item.categoryId}"/>
+			</li>
+		    </c:if>
+		    <c:if test="${loop.index == 9}">
+			<li><a href="Client?action=viewCategories">More</a></li>
+		    </c:if>
+		</c:forEach>
+	    </ul>
         </nav> <!-- End Main-Navigation -->
 
         <div class="row-fluid">
             <div id="main" class="span8 page image-preloader">
 
                 <div class="row-fluid">
-                 <%String m = (String)request.getAttribute("message");if(m!=null){%><label><b>${message}</b></label><br><%}%>
-                    <%String m1 = (String)request.getAttribute("message1");if(m1!=null){%><label><b>${message1}</b></label><br><%}%>
+		    <h1>Change Password</h1><br>
+                    <form method="post" action="Client" name="reloginform">
+                        <table style="margin-left: 5px">
+                            <tr><td><label>Old Password :</label></td>
+                                <td><input type="password" name="oldpassword" maxlength="20" placeholder="Username" id="username"/></td>
+                            </tr>
+                            <tr><td><label>New Password :</label></td>
+                                <td><input type="password" name="password" maxlength="20" placeholder="Username" id="username"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Confirm New Password :</label></td>
+                                <td><input type="password" name="confirmpassword" maxlength="20" placeholder="Password" id="answer"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="submit" name="action" value="Change Password" class="btn btn-small" onclick="return validate();" />
+                                    <input type="button" onclick="history.go(-1);" value="Cancel" class="btn btn-small"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
                 </div> <!-- End Row-Fluid -->
             </div> <!-- End Main -->
 
