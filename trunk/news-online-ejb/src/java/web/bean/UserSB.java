@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package web.bean;
 
 import java.text.SimpleDateFormat;
@@ -22,18 +21,20 @@ import web.entity.Users;
  */
 @Stateless
 public class UserSB implements UserSBLocal {
+
     @PersistenceContext(unitName = "news-online-ejbPU")
     private EntityManager em;
 
     public void persist(Object object) {
-	em.persist(object);
+        em.persist(object);
     }
 
     public Users getUserById(int userId) {
-	Query q = em.createNamedQuery("Users.findByUserId");
-	q.setParameter("userId", userId);
-	return (Users)q.getResultList().get(0);
+        Query q = em.createNamedQuery("Users.findByUserId");
+        q.setParameter("userId", userId);
+        return (Users) q.getResultList().get(0);
     }
+
     public List<Users> getUsers(String role, boolean status) {
         if (role.equals("User")) {
             Query q = em.createQuery("SELECT u FROM Users u WHERE u.status = :status and u.roles = 'User'");
@@ -63,16 +64,12 @@ public class UserSB implements UserSBLocal {
             u.setEmail(email);
             u.setFullName(fullname);
             u.setGender(gender);
-	    if(image==null)
-		{
-		    image="image.jpg";
-		}
             u.setImage(image);
             u.setPhone(phone);
             u.setRoles(roles);
             u.setStatus(status);
-            u.setQuestion(getUserByName(username).getQuestion());
-            u.setAnswer(getUserByName(username).getAnswer());
+            u.setQuestion(question);
+            u.setAnswer(answer);
             em.persist(u);
             flag = true;
         } catch (Exception e) {
@@ -81,33 +78,29 @@ public class UserSB implements UserSBLocal {
         return flag;
     }
 
-     public boolean update(int userid, String image, String fullname, String birthday, boolean gender, String address, String phone, String email, String role, int categoryid, boolean activesms) {
+    public boolean update(int userid, String image, String fullname, String birthday, boolean gender, String address, String phone, String email,String question,String answer, int categoryid, boolean activesms) {
         boolean flag = false;
         try {
-                Users u = new Users();
-                u.setUserId(userid);
-                u.setUsername(getUser(userid).getUsername());
-                u.setPassword(getUser(userid).getPassword());
-                u.setActiveSMS(activesms);
-                u.setLastLogin(getUser(userid).getLastLogin());
-                u.setStatus(getUser(userid).getStatus());
-                u.setAddress(address);
-                u.setBirthday(birthday);
-                u.setCategory(getCategoryById(categoryid));
-                u.setEmail(email);
-                u.setFullName(fullname);
-                u.setGender(gender);
-		if(image==null)
-		{
-		    image="image.jpg";
-		}
-                u.setImage(image);
-                u.setPhone(phone);
-                u.setRoles(role);
-                u.setQuestion(getUserById(userid).getQuestion());
-                u.setAnswer(getUserById(userid).getAnswer());
-                em.merge(u);
-                flag = true;
+            Users u = new Users();
+            u.setUserId(userid);
+            u.setUsername(getUser(userid).getUsername());
+            u.setPassword(getUser(userid).getPassword());
+            u.setActiveSMS(activesms);
+            u.setLastLogin(getUser(userid).getLastLogin());
+            u.setStatus(getUser(userid).getStatus());
+            u.setAddress(address);
+            u.setBirthday(birthday);
+            u.setCategory(getCategoryById(categoryid));
+            u.setEmail(email);
+            u.setFullName(fullname);
+            u.setGender(gender);
+            u.setImage(image);
+            u.setPhone(phone);
+            u.setRoles(getUser(userid).getRoles());
+            u.setQuestion(question);
+            u.setAnswer(answer);
+            em.merge(u);
+            flag = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -167,8 +160,7 @@ public class UserSB implements UserSBLocal {
     }
 
     public String getLastLogin(int userId) {
-        if(getUser(userId).getLastLogin()==null)
-        {
+        if (getUser(userId).getLastLogin() == null) {
             return "";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -197,11 +189,15 @@ public class UserSB implements UserSBLocal {
                 }
             } else {
                 if (Integer.parseInt(t2.split(":")[1]) > Integer.parseInt(t1.split(":")[1])) {
-                    return String.valueOf(Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0])) + " Hours " + String.valueOf(Integer.parseInt(t2.split(":")[1]) - Integer.parseInt(t1.split(":")[1])) + " Minute(s) ago aaaa";
-                } else if (Integer.parseInt(t2.split(":")[1]) == Integer.parseInt(t1.split(":")[1])) {
-                    return String.valueOf(Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0])) + " Hours ago";
+                    return String.valueOf(Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0])) + " Hours " + String.valueOf(Integer.parseInt(t2.split(":")[1]) - Integer.parseInt(t1.split(":")[1])) + " Minute(s) ago";
+                } else if (Integer.parseInt(t2.split(":")[1]) < Integer.parseInt(t1.split(":")[1])) {
+                    if ((Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0])) < 0) {
+                        return String.valueOf(Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0]) + 11) + " Hours " + String.valueOf(60 + Integer.parseInt(t2.split(":")[1]) - Integer.parseInt(t1.split(":")[1])) + " Minute(s) ago";
+                    } else {
+                        return String.valueOf(Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0]) - 1) + " Hours " + String.valueOf(60 + Integer.parseInt(t2.split(":")[1]) - Integer.parseInt(t1.split(":")[1])) + " Minute(s) ago";
+                    }
                 } else {
-                    return String.valueOf(Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0]) - 1) + " Hours " + String.valueOf(60 + Integer.parseInt(t2.split(":")[1]) - Integer.parseInt(t1.split(":")[1])) + " Minute(s) ago bbbb";
+                    return String.valueOf(Integer.parseInt(t2.split(":")[0]) - Integer.parseInt(t1.split(":")[0])) + " Hours ago";
                 }
             }
 
@@ -220,11 +216,12 @@ public class UserSB implements UserSBLocal {
         }
     }
 
-    public void setLastLogin(int userId) {
+    public void setLastLogin(String username) {
         try {
-            Users u = getUser(userId);
+            Users u = getUserByName(username);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
             Date d = new Date();
-            u.setLastLogin(d);
+            u.setLastLogin(sdf.parse(sdf.format(d)));
             em.merge(u);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -236,42 +233,56 @@ public class UserSB implements UserSBLocal {
     }
 
     public List<Category> getCategories() {
-        return em.createNamedQuery("Category.findAll").getResultList();
+        List<Category> all = em.createNamedQuery("Category.findAll").getResultList();
+        for(int i =0;i<all.size();i++)
+        {
+            if(!getSubCategories(all.get(i).getCategoryId().toString()).isEmpty())
+            {
+                all.remove(i);
+            }
+        }
+        return all;
     }
 
-    public boolean checkInsert(String username, String email,String img) {
+
+    public List<Category> getSubCategories(String parentCategoryId) {
+        Query q = em.createNamedQuery("Category.findByParent");
+        q.setParameter("parent", parentCategoryId);
+        return q.getResultList();
+    }
+
+    public Users getUserByName(String username) {
+        return (Users) em.createNamedQuery("Users.findByUsername").setParameter("username", username).getResultList().get(0);
+    }
+
+    public boolean checkusername(String username) {
         boolean flag=false;
         try {
-            List<Users> luser = em.createNamedQuery("Users.findAll").getResultList();
-            List lusername = new ArrayList();
-            List lemail = new ArrayList();
-            List limg = new ArrayList();
-            for(int i =0;i<luser.size();i++)
+            List name = new ArrayList();
+            name = em.createNamedQuery("Users.findByUsername").setParameter("username",username).getResultList();
+            if(!name.isEmpty())
             {
-                lusername.add(luser.get(i).getUsername());
-                lemail.add(luser.get(i).getEmail());
-                limg.add(luser.get(i).getImage());
-            }
-            if(lusername.contains(username) || lemail.contains(email) || limg.contains(img))
-            {
-                flag = true;
+                flag=true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return flag;
     }
 
-    public List<Category> getSubCategories(String parentCategoryId) {
-        Query q = em.createNamedQuery("Category.findByParent");
-	q.setParameter("parent", parentCategoryId);
-	return q.getResultList();
+    public boolean checkemail(String email) {
+        boolean flag=false;
+        try {
+            List name = new ArrayList();
+            name = em.createNamedQuery("Users.findByEmail").setParameter("email",email).getResultList();
+            if(!name.isEmpty())
+            {
+                flag=true;
+            }
+        } catch (Exception e) {
+        }
+        return flag;
     }
 
-    public Users getUserByName(String username) {
-	return (Users) em.createNamedQuery("Users.findByUsername").setParameter("username",username).getResultList().get(0);
-    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-
 }

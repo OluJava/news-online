@@ -43,7 +43,7 @@ public class NewsSB implements NewsSBLocal {
     public List<News> getPopularNews() {
 	Query q = em.createQuery("SELECT n FROM News n WHERE n.postedDate > :postedDate AND n.status = :status ORDER BY n.viewed DESC");
 	Calendar c = Calendar.getInstance();
-	c.add(Calendar.DATE, -10);
+	c.add(Calendar.DATE, -15);
 	q.setParameter("postedDate", c, TemporalType.DATE);
 	q.setParameter("status", true);
 	return q.getResultList();
