@@ -4,6 +4,7 @@
     Author     : Khatmau_sr
 --%>
 
+<%@page import="web.entity.Users"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -54,6 +55,10 @@
 
     </head>
     <body>
+	<%
+                     Users u = (Users) session.getAttribute("curUser");
+                    String username = u.getUsername();
+        %>
 	<div class="container_12">
 	    <div class="grid_12 header-repeat">
 		<div id="branding">
@@ -64,12 +69,12 @@
 			    <img src="admin/img/img-profile.jpg" alt="Profile Pic" /></div>
 			<div class="floatleft marginleft10">
 			    <ul class="inline-ul floatleft">
-				<li>Hello Admin</li>
-				<li><a href="#">Config</a></li>
-				<li><a href="#">Logout</a></li>
+				<li>Hello <%=username%></li>
+				<li><a href="profile.jsp">Config</a></li>
+				<li><a href="/news-online-war/Admin?action=Logout">Logout</a></li>
 			    </ul>
 			    <br />
-			    <span class="small grey">Last Login: 3 hours ago</span>
+			    <span class="small grey">Last Login:<%=u.getLastLogin()%></span>
 			</div>
 		    </div>
 		    <div class="clear">
@@ -80,14 +85,15 @@
 	    </div>
 	    <div class="grid_12">
 		<ul class="nav main">
-		    <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
-                    <li class="ic-typography"><a href="#"><span>User Manager</span></a></li>
-                    <li class="ic-charts"><a href="#"><span>Category</span></a></li>
-		    <li class="ic-grid-tables"><a href="#"><span>Comment</span></a></li>
+                    <li class="ic-form-style"><a href="/news-online-war/Admin?action=news-list"><span>News Manager</span></a></li>
+                    <%if(u.getRoles().equals("Admin")){%><li class="ic-typography"><a href="/news-online-war/Admin?action=users-list"><span>User Manager</span></a></li><%}%>
+                    <li class="ic-charts"><a href="/news-online-war/Admin?action=category-list"><span>Category</span></a></li>
+		    <li class="ic-grid-tables"><a href="table.html"><span>Comment</span></a></li>
                     <li class="ic-gallery dd"><a href="/news-online-war/Admin?action=image-list"><span>Image Galleries</span></a></li>
-                    <li class="ic-notifications"><a href="#"><span>Feedback</span></a></li>
+                    <li class="ic-notifications"><a href="/news-online-war/Admin?action=feedback-list"><span>Feedback</span></a></li>
 		    <li class="ic-dashboard"><a href="/news-online-war/Admin?action=news-popular"><span>News Popular</span></a></li>
-		</ul>
+
+                </ul>
 	    </div>
 	    <div class="clear">
 	    </div>
@@ -97,25 +103,25 @@
 			<ul class="section menu">
 			<li><a class="menuitem" style="cursor: default" >Account</a>
                                 <ul class="submenu">
-                                    <li><a>Update profile</a> </li>
-                                    <li><a>Change password</a> </li>
-                                    <li><a>Logout</a> </li>
+                                    <li><a href="profile.jsp">Update profile</a> </li>
+                                    <li><a href="changepassword.jsp">Change password</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=Logout">Logout</a> </li>
                                 </ul>
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Insert</a>
                                 <ul class="submenu">
                                     <li><a href="/news-online-war/Admin?action=news-add" >Add News</a> </li>
-                                    <li><a>Add Users</a> </li>
-                                    <li><a>Add Category</a> </li>
+                                    <%if(u.getRoles().equals("Admin")){%><li><a href="/news-online-war/Admin?action=users-add">Add Users</a> </li><%}%>
+                                    <li><a href="/news-online-war/Admin?action=category-add">Add Category</a> </li>
                                 </ul>
                             </li>
                             <li><a class="menuitem" style="cursor: default" >Trash</a>
                                 <ul class="submenu">
                                     <li><a href="/news-online-war/Admin?action=news-trash">News</a> </li>
-                                    <li><a>Users</a> </li>
-                                    <li><a>Category</a> </li>
+                                    <%if(u.getRoles().equals("Admin")){%><li><a href="/news-online-war/Admin?action=users-trash">Users</a> </li><%}%>
+                                    <li><a href="/news-online-war/Admin?action=category-trash">Category</a> </li>
                                     <li><a>Comment</a> </li>
-                                    <li><a>Feedback</a> </li>
+                                    <li><a href="/news-online-war/Admin?action=feedback-trash">Feedback</a> </li>
                                 </ul>
                             </li>
                         </ul>

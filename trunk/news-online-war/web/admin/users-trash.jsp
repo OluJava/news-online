@@ -1,17 +1,18 @@
-<%--
-    Document   : category-edit
-    Created on : Apr 26, 2013, 8:48:44 AM
+<%-- 
+    Document   : news-trash
+    Created on : Apr 23, 2013, 2:28:57 PM
     Author     : Khatmau_sr
 --%>
-<%@page import="web.entity.Users"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
+<%@page import="web.entity.Users"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Edit Category | NewsOnline Admin</title>
+        <title>News Trash | NewsOnline Admin</title>
         <link rel="stylesheet" type="text/css" href="admin/css/reset.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="admin/css/text.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="admin/css/grid.css" media="screen" />
@@ -19,36 +20,29 @@
         <link rel="stylesheet" type="text/css" href="admin/css/nav.css" media="screen" />
         <!--[if IE 6]><link rel="stylesheet" type="text/css" href="admin/css/ie6.css" media="screen" /><![endif]-->
         <!--[if IE 7]><link rel="stylesheet" type="text/css" href="admin/css/ie.css" media="screen" /><![endif]-->
+        <link href="admin/css/table/demo_page.css" rel="stylesheet" type="text/css" />
         <!-- BEGIN: load jquery -->
-        <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-        <script type="text/javascript" src="admin/js/jquery-1.6.4.min.js" ></script>
-        <script type="text/javascript" src="admin/js/jquery-ui/jquery.ui.core.min.js"></script>
+        <script src="admin/js/jquery-1.6.4.min.js" type="text/javascript"></script>
+        <script src="admin/js/jquery-ui/jquery.ui.core.min.js" type="text/javascript"></script>
         <script src="admin/js/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
         <script src="admin/js/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
         <script src="admin/js/jquery-ui/jquery.effects.core.min.js" type="text/javascript"></script>
         <script src="admin/js/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
+        <script src="admin/js/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
+        <script src="admin/js/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
+        <script src="admin/js/table/jquery.dataTables.min.js" type="text/javascript"></script>
         <!-- END: load jquery -->
-        <!-- BEGIN: load jqplot -->
-        <link rel="stylesheet" type="text/css" href="admin/css/jquery.jqplot.min.css" />
-        <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="admin/js/jqPlot/excanvas.min.js"></script><![endif]-->
-        <script language="javascript" type="text/javascript" src="admin/js/jqPlot/jquery.jqplot.min.js"></script>
-        <script type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.canvasTextRenderer.min.js"></script>
-        <script type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.barRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.pieRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script language="javascript" type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.highlighter.min.js"></script>
-        <script language="javascript" type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.pointLabels.min.js"></script>
-        <script type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.donutRenderer.min.js"></script>
-        <script type="text/javascript" src="admin/js/jqPlot/plugins/jqplot.bubbleRenderer.min.js"></script>
-        <!-- END: load jqplot -->
+        <script type="text/javascript" src="admin/js/table/table.js"></script>
         <script src="admin/js/setup.js" type="text/javascript"></script>
         <script type="text/javascript">
 
             $(document).ready(function () {
                 setupLeftMenu();
 
+                $('.datatable').dataTable();
                 setSidebarHeight();
+
+
             });
         </script>
     </head>
@@ -61,10 +55,10 @@
 	    <div class="grid_12 header-repeat">
 		<div id="branding">
 		    <div class="floatleft">
-			<img src="admin/img/logo.png" alt="Logo" /></div>
+			<img src="img/logo.png" alt="Logo" /></div>
 		    <div class="floatright">
 			<div class="floatleft">
-			    <img src="admin/img/img-profile.jpg" alt="Profile Pic" /></div>
+			    <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
 			<div class="floatleft marginleft10">
 			    <ul class="inline-ul floatleft">
 				<li>Hello <%=username%></li>
@@ -127,51 +121,59 @@
 		</div>
 	    </div>
             <div class="grid_10">
-                <div class="box round first">
+                <div class="box round first grid">
                     <h2>
-                        Insert Category</h2>
-                    <div class="block ">
-                        <form action="/news-online-war/Admin?action=editCategory&cateId=${category.categoryId}" method="POST">
-                            <table class="form">
-				<tr>
-				    <td width="150px">
-					<label>
-					    Title</label>
-				    </td>
-				    <td class="col2">
-					<input type="text" name="title" value="${category.title}" class="mini" maxlength="50"/>
-				    </td>
-				</tr>
-				<tr>
-				    <td>
-					<label>
-					    Parent</label>
-				    </td>
-				    <td>
-					<select style="margin-top: 20px" id="select" name="parent">
-					    <option value="None">None parent</option>
-					    <c:forEach items="${cateList}" var="item">
-						<c:set var="id">${item.categoryId}</c:set>
-						<c:if test="${category.parent eq id}">
-						    <option selected value="${item.categoryId}">${item.title}</option>
-						</c:if>
-						<c:if test="${category.parent ne id}">
-						    <option value="${item.categoryId}">${item.title}</option>
-						</c:if>
-					    </c:forEach>
-					</select>
-				    </td>
-				</tr>
-				<tr>
-				    <td></td>
-				    <td>
-					<div style="margin-top: 25px">
-					    <button class="btn-icon btn-grey btn-check"><span></span>Save</button>
-					</div>
-				    </td>
-				</tr>
-			    </table>
+			News Trash</h2>
+                    <div class="block">
+                        <form action="/news-online-war/Admin" onsubmit="changerole()">
+                            <input type="hidden" name="action" value="changerole"/>
+                            <select style="width: 150px" name="role" onchange="this.form.submit()">
+                                <option value="All" <c:if test="${selectedRole == 'All'}">selected</c:if>>--All--</option>
+                                <option value="Employee" <c:if test="${selectedRole == 'Employee'}">selected</c:if>>Employee</option>
+                                <option value="User"<c:if test="${selectedRole == 'User'}">selected</c:if>>User</option>
+                            </select>
                         </form>
+                        <table class="data display datatable" id="example">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>Username</th>
+                                    <th>Birthday</th>
+                                    <th>Gender</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Restore</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${userTrash}" var="item">
+                                    <tr class="gradeA">
+                                        <td>${item.fullName}</td>
+                                        <td>${item.username}</td>
+                                        <td>${item.birthday}</td>
+                                        <td>
+                                            <c:if test="${item.gender}">Male</c:if>
+                                            <c:if test="${!item.gender}">Female</c:if>
+                                        </td>
+                                        <td>${item.phone}</td>
+                                        <td>${item.email}</td>
+                                        <td>${item.roles}</td>
+                                        <td align="center">
+                                            <a href="/news-online-war/Admin?action=unblock&userId=${item.userId}">
+                                                <img src="admin/img/edit.png" alt="Unblock User"/>
+                                            </a>
+                                        </td>
+                                        <td align="center">
+                                            <a href="/news-online-war/Admin?action=deleteuser&userId=${item.userId}" onclick="return confirm('Are You Sure To Delete This User ?');">
+                                                <img src="admin/img/trash.png" alt="Delete User"/>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -182,7 +184,7 @@
         </div>
         <div id="site_info">
             <p>
-                Copyright <a href="#">NewsOnline Admin</a>. All Rights Reserved.
+		Copyright <a href="/news-online-war/Admin?action=index">NewsOnline Admin</a>. All Rights Reserved.
             </p>
         </div>
     </body>
