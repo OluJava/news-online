@@ -20,7 +20,7 @@ public interface UserSBLocal {
     Users getUserById(int userId);
      boolean insert(String username, String password, String image, String fullname, String birthday, boolean gender, String address, String phone, String email, String question, String answer, String roles, int categoryid, boolean activesms, boolean status);
 
-    boolean update(int userid, String image, String fullname, String birthday, boolean gender, String address, String phone, String email, String role, int categoryid, boolean activesms);
+    boolean update(int userid, String image, String fullname, String birthday, boolean gender, String address, String phone, String email,String question,String answer, int categoryid, boolean activesms);
 
     Users getUser(int userId);
 
@@ -34,15 +34,17 @@ public interface UserSBLocal {
 
     void Block(int userId, boolean flag);
 
-    void setLastLogin(int userId);
+    void setLastLogin(String username);
 
     Category getCategoryById(int id);
 
     List<Category> getCategories();
-
-    boolean checkInsert(String username, String email, String img);
-
     List<Category> getSubCategories(String parentCategoryId);
 
     Users getUserByName(String username);
+
+    boolean checkusername(String username);
+
+    boolean checkemail(String email);
+    public List<Users> getUsers(String role, boolean status);
 }
