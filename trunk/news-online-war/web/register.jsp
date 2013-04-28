@@ -83,55 +83,69 @@
             });
         });
     </script>
-    <script language="javascript">
+    <script>
         function validate() {
-            if(document.registerform.username.value == '')
+            //
+            var rexuser= /^[a-zA-Z0-9._-]{6,}$/;
+            if(!rexuser.test(document.registerform.username.value))
             {
-                alert ('Username Cant Be Blank');
-                return false;
-            }
-            if(document.registerform.password.value == '')
-            {
-                alert ('Password Cant Be Blank');
+                alert ('Username Must Be A-Z, 0-9 And Length Must Be At Least 6');
+                registerform.username.focus();
                 return false;
             }
             if(document.registerform.confirmpassword.value == '')
             {
-                alert ('Confirm Password Cant Be Blank');
+                alert ('Confirm Password Can Not Be Blank');
+                registerform.confirmpassword.focus();
                 return false;
             }
-	    if(document.registerform.confirmpassword.value != document.registerform.password.value)
+            if(document.registerform.password.value.length < 6)
             {
-                alert ('Confirm Password Doesnt Match');
+                alert ('Password Length Must Be At Least 6');
+                registerform.password.focus();
+                return false;
+            }
+            if(document.registerform.confirmpassword.value != document.registerform.password.value)
+            {
+                alert ('Confirm Password And Password Are Not The Same');
+                registerform.confirmpassword.focus();
                 return false;
             }
             if(document.registerform.fullname.value == '')
             {
-                alert ('Fullname Cant Be Blank');
+                alert ('Fullname Can Not Be Blank');
+                registerform.fullname.focus();
                 return false;
             }
             if(document.registerform.address.value == '')
             {
-                alert ('Adress Cant Be Blank');
+                alert ('Adress Can Not Be Blank');
+                registerform.address.focus();
                 return false;
             }
-            if(document.registerform.phone.value == '')
+            //
+            var rexphone=/^0\d{7,12}$/;
+            if(!rexphone.test(document.registerform.phone.value))
             {
-                alert ('Phone Number Cant Be Blank');
+                alert ('Phone Number Must Be 0-9, Start By 0 And Length Must Be At Least 8');
+                registerform.phone.focus();
                 return false;
             }
-            if(document.registerform.email.value == '')
+            var rexemail=/^\w+([\-\.]\w+)*@\w+\.\w+$/;
+            if(!rexemail.test(document.registerform.email.value))
             {
-                alert ('Email Cant Be Blank');
+                alert ("Email Must Be In Formated: xxxx@xxx.xxx!");
+                registerform.email.focus();
                 return false;
             }
             if(document.registerform.answer.value == '')
             {
                 alert ('Please Answer The Secret Question');
+                registerform.answer.focus();
                 return false;
             }
             return true;
-        
+
         }
     </script>
 </head>
@@ -234,20 +248,20 @@
                             </tr>
                             <tr>
                                 <td><label>Birthday <span class="font-required">*</span></label></td>
-                                <td><input class="inputDate" id="inputDate" value="" name="insertBirthday"/></td>
+                                <td><input class="inputDate" id="inputDate" value="${curdate}" name="insertBirthday" readonly /></td>
                             </tr>
                             <tr>
                                 <td><label>Gender <span class="font-required">*</span></label></td>
-                                <td><input type="radio" name="insertrd1" checked /> Male <input type="radio" name="rd1" /> Female</td>
+                                <td><input type="radio" name="insertrd1" value="Male" checked /> Male <input type="radio" value="Female" name="insertrd1" /> Female</td>
                             </tr>
 
                             <tr>
                                 <td><label>Address <span class="font-required">*</span></label></td>
-                                <td><input type="text" name="insertAddress" maxlength="20" id="address"/></td>
+                                <td><input type="text" name="insertAddress" maxlength="100" id="address"/></td>
                             </tr>
                             <tr>
                                 <td><label>Phone number <span class="font-required">*</span></label></td>
-                                <td><input type="text" name="insertPhoneNumber" maxlength="20" id="phone" /></td>
+                                <td><input type="text" name="insertPhoneNumber" maxlength="11" id="phone" /></td>
                             </tr>
                             <tr>
                                 <td><label>Email <span class="font-required">*</span></label></td>
@@ -255,7 +269,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><label>These Question And Answer To Help You Recover Password</label></td>
+                                <td><label><b>* These Question And Answer To Help You Recover Password<br>* You Can't Change It Again</b></label></td>
                             </tr>
                             <tr>
                                 <td><label>Secret Question <span class="font-required">*</span></label></td>
@@ -279,10 +293,11 @@
                                 <td></td>
                                 <td><input type="checkbox" name="insertSMS" value="ON" checked />I Agree To Receive SMS Service</td>
                             </tr>
+                            <tr><td></td><td></td></tr>
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="submit" name="action" value="Register" class="btn btn-small" onclick="return validate();"/>
+                                    <input type="submit" name="action" value="Submit Register" class="btn btn-small" onclick="return validate();"/>
                                     <input type="button" onclick="history.go(-1);" value="Cancel" class="btn btn-small"/>
                                 </td>
                             </tr>

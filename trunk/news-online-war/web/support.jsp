@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="web.entity.Users"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="/WEB-INF/tlds/myTag" prefix="mt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -17,7 +18,7 @@
     <head>
 
 	<!-- Your Basic Site Informations -->
-	<title>Feedback</title>
+	<title>Support</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="description" content="Enews is a news or magazine site template that built with very cool responsive template with clean design, fast load, seo friendly, beauty color and a slew of features." />
 	<meta name="keywords" content="Site Template, News, Magazine, Portofolio, HTML, CSS, jQuery, Newsletter, PHP Contact, Subscription, Responsive, Marketing, Clean, SEO" />
@@ -199,111 +200,144 @@
 
 		<div id="sidebar" class="span4">
 
-		    <div class="widget clearfix">
-			<div class="enews-tab">
+			<div class="widget clearfix">
+			    <div class="enews-tab">
 
-			    <!-- Tab Menu -->
-			    <ul class="nav nav-tabs" id="enewsTabs">
-				<li class="active"><a href="#tab-populars" data-toggle="tab">Populars</a></li>
-				<li><a href="#tab-recents" data-toggle="tab">Recents</a></li>
-				<li><a href="#tab-comments" data-toggle="tab">Comments</a></li>
-			    </ul>
+				<!-- Tab Menu -->
+				<ul class="nav nav-tabs" id="enewsTabs">
+				    <li class="active"><a href="#tab-populars" data-toggle="tab">Populars</a></li>
+				    <li><a href="#tab-recents" data-toggle="tab">Recents</a></li>
+				    <li><a href="#tab-comments" data-toggle="tab">Comments</a></li>
+				</ul>
 
-			    <div class="tab-content">
-				<div class="tab-pane active" id="tab-populars">
+				<div class="tab-content">
+				    <div class="tab-pane active" id="tab-populars">
 
-				    <c:forEach items="${popularList}" var="item" varStatus="loop">
-					<c:if test="${loop.index < 6}">
-					    <div class="item">
-						<figure class="pull-left"><img src="images/content/300/5.jpg" alt="${item.title}" /></figure>
-						<div class="pull-right content">
-						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="${item.title}">${item.title}</a></h4>
-						    <p class="meta">${item.viewed} views&nbsp;&nbsp;|&nbsp;&nbsp;0 comments</p>
+					<c:forEach items="${popularList}" var="item" varStatus="loop">
+					    <c:if test="${loop.index < 6}">
+						<div class="item">
+						    <figure class="pull-left"><img src="admin/img/news/${item.image}" alt="${item.title}" /></figure>
+						    <div class="pull-right content">
+							<h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="${item.title}">${item.title}</a></h4>
+							<p class="meta">${item.viewed} views&nbsp;&nbsp;|&nbsp;&nbsp;${fn:length(item.commentCollection)} comments</p>
+						    </div>
 						</div>
-					    </div>
-					</c:if>
-				    </c:forEach>
-				</div> <!-- End Populars -->
+					    </c:if>
+					</c:forEach>
 
-				<div class="tab-pane" id="tab-recents">
+				    </div> <!-- End Populars -->
 
-				    <c:forEach items="${recentList}" var="item" varStatus="loop">
-					<c:if test="${loop.index < 6}">
-					    <div class="item">
-						<figure class="pull-left"><img src="images/content/300/2.jpg" alt="${item.title}" /></figure>
-						<div class="pull-right content">
-						    <h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="${item.title}">${item.title}</a></h4>
-						    <p class="meta">In <a href="#">${item.category.title}</a> on <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></p>
+				    <div class="tab-pane" id="tab-recents">
+
+					<c:forEach items="${recentList}" var="item" varStatus="loop">
+					    <c:if test="${loop.index < 6}">
+						<div class="item">
+						    <figure class="pull-left"><img src="admin/img/news/${item.image}" alt="${item.title}" /></figure>
+						    <div class="pull-right content">
+							<h4><a href="Client?action=viewDetail&newsId=${item.newsId}" title="${item.title}">${item.title}</a></h4>
+							<p class="meta">On <fmt:formatDate pattern="MMM. dd, yyyy" value="${item.postedDate}" /></p>
+						    </div>
 						</div>
+					    </c:if>
+					</c:forEach>
+				    </div> <!-- End Recents -->
+
+				    <div class="tab-pane" id="tab-comments">
+
+					<!-- One -->
+					<div class="item">
+					    <figure class="pull-left"><img src="images/content/avatar/1.jpg" alt="Avatar 1" /></figure>
+					    <div class="pull-right content">
+						<p><a href="#">mdkiwol</a> on <a href="single_post.html" title="View comment on Glass House Below The Dark of Moon Light">Glass House Below The Dark of Moon Light</a></p>
 					    </div>
-					</c:if>
-				    </c:forEach>
-				</div> <!-- End Recents -->
-
-				<div class="tab-pane" id="tab-comments">
-
-				    <!-- One -->
-				    <div class="item">
-					<figure class="pull-left"><img src="images/content/avatar/1.jpg" alt="Avatar 1" /></figure>
-					<div class="pull-right content">
-					    <p><a href="#">mdkiwol</a> on <a href="single_post.html" title="View comment on Glass House Below The Dark of Moon Light">Glass House Below The Dark of Moon Light</a></p>
 					</div>
-				    </div>
 
-				</div> <!-- End Comments -->
-			    </div> <!-- End Tab-Content -->
+				    </div> <!-- End Comments -->
+				</div> <!-- End Tab-Content -->
 
-			</div> <!-- End Enews-Tab -->
-		    </div> <!-- End Widget -->
+			    </div> <!-- End Enews-Tab -->
+			</div> <!-- End Widget -->
 
-		    <div class="widget clearfix">
-			<div class="contact-details">
-			    <div class="header">
-				<h4>Login Form</h4>
+			<div class="widget clearfix">
+                            <div class="contact-details">
+                                <div class="header">
+                                    <h4>Login Form</h4>
+                                </div>
+                                <div class="content">
+                                    <form method="post" action="Client" name="loginform">
+                                        <%
+                                                    Users u = (Users) session.getAttribute("curUser");
+                                                    if (u == null) {
+                                        %>
+                                        <table style="margin-left: 5px">
+                                            <tr>
+                                                <td><input type="text" name="username" maxlength="20" placeholder="Username" id="lgusername"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="password" name="password" maxlength="20" placeholder="Password" id="lgpassword" style="width: 206px;
+							   height: 35px;-webkit-border-radius: 0px;-moz-border-radius: 0px;
+							   -border-radius: 0px;border:1px solid #DBDBDB; font-size: 15px"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="submit" name="action" value="Submit" class="btn btn-small" onclick="return validate();" />
+                                                    <input type="submit" name="action" value="Register" class="btn btn-small" /><br>
+                                                    <label><b><a href="recoverpassword.jsp">I Forgot My Password !</a></b></label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <%} else {
+                                                                                            String username = u.getUsername();
+                                                                                            String lastLogin = (String) session.getAttribute("lastLogin");
+
+                                        %>
+                                        <table style="margin-left: 5px" cellpadding="1" >
+                                            <%
+                                                                                                if (u.getRoles().equals("User")) {
+                                            %>
+                                            <tr>
+                                                <td><b><a href="profile.jsp"><%=username%></a></b></td>
+                                                <td><a href="Client?action=Logout"><b>Logout</b></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><b><%if (lastLogin != null) {%>Last Login : <%=lastLogin%><%}%><br></b></td><td></td>
+                                            </tr>
+                                            <tr><td><a href="changepassword.jsp"><b>Change Password</b></a></td><td></td></tr>
+                                            <%} else {%>
+                                            <tr>
+                                                <td><b><a href="Client?action=goAdmin"><%=username%></a></b></td>
+                                                <td><a href="Client?action=Logout"><b>Logout</b></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><b><%if (lastLogin != null) {%>Last Login : <%=lastLogin%><%}%><br></b></td><td></td>
+                                            </tr>
+                                            <%}%>
+                                        </table>
+
+                                        <%}%>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> <!-- End Widget -->
+
+			<div class="widget clearfix">
+			    <div class="sponsors">
+
+				<div class="header">
+				    <h4>Sponsors</h4>
+				</div>
+
+				<div class="content">
+				    <img src="images/ads/180x180.png" alt="Sponsor 1" />
+				    <img src="images/ads/180x180.png" alt="Sponsor 2" />
+				    <img src="images/ads/180x180.png" alt="Sponsor 3" />
+				    <img src="images/ads/180x180.png" alt="Sponsor 4" />
+				</div>
+
 			    </div>
-			    <div class="content">
-				<form action="Client" name="loginform">
-                                    <%
-						Users u = (Users) session.getAttribute("curUser");
-						if (u == null) {
-                                    %>
-                                    Username :<input type="text" name="username" id="lgusername"/><br>
-                                    Password :<input type="password" name="password" id="lgpassword" /><br>
-                                    <input type="submit" name="action" value="Login" onclick="return validate();"/><br>
-                                    <input type="submit" name="action" value="Register A New Account"/><br>
-                                    <%} else {
-											String username = u.getUsername();
-											String lastLogin = (String) session.getAttribute("lastLogin");
+			</div> <!-- End Widget -->
 
-                                    %>
-
-                                    <a href="profile.jsp"><%=username%></a><br>
-				    <%if (lastLogin != null) {%>Last Login : <%=lastLogin%><%}%><br>
-                                    <a href="changepassword.jsp">Change Password</a><br>
-                                    <%}%>
-                                </form>
-			    </div>
-			</div>
-		    </div> <!-- End Widget -->
-
-		    <div class="widget clearfix">
-			<div class="sponsors">
-
-			    <div class="header">
-				<h4>Sponsors</h4>
-			    </div>
-
-			    <div class="content">
-				<img src="images/ads/180x180.png" alt="Sponsor 1" />
-				<img src="images/ads/180x180.png" alt="Sponsor 2" />
-				<img src="images/ads/180x180.png" alt="Sponsor 3" />
-				<img src="images/ads/180x180.png" alt="Sponsor 4" />
-			    </div>
-
-			</div>
-		    </div> <!-- End Widget -->
-
-		</div> <!-- End Sidebar -->
+		    </div> <!-- End Sidebar -->
 
 	    </div> <!-- End Row-Fluid -->
 	</div> <!-- End Container -->

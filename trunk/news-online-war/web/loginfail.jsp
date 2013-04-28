@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -37,6 +38,8 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
+    <link rel="stylesheet" href="css/datepicker.css" type="text/css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="css/layout.css" />
     <!-- JavaScript -->
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type='text/javascript' src='js/bootstrap.min.js'></script>
@@ -53,19 +56,28 @@
     <script type='text/javascript' src='js/jquery.hoverdir.js'></script>
     <script type='text/javascript' src='js/modernizr.custom.js'></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/jquery.datePicker.js"></script>
+    //
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/datepicker.js"></script>
+    <script type="text/javascript" src="js/eye.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/layout.js?ver=1.0.2"></script>
     <script language="javascript">
         function validate() {
             if(document.reloginform.lgusername.value  == '')
-                {
-                    alert('Username Cant Be Blank');
-                    return false;
-                }
-                if(document.reloginform.lgpassword.value  == '')
-                {
-                    alert('Password Cant Be Blank');
-                    return false;
-                }
-                return true;
+            {
+                alert('Username Can Not Be Blank');
+                reloginform.lgusername.focus();
+                return false;
+            }
+            if(document.reloginform.lgpassword.value  == '')
+            {
+                alert('Password Can Not Be Blank');
+                reloginform.lgpassword.focus();
+                return false;
+            }
+            return true;
         }
     </script>
 </head>
@@ -74,7 +86,6 @@
 
     <div id="top-navigation">
         <div class="container">
-
             <!-- Navigation -->
             <ul class="nav-menu pull-left">
                 <li class="active"><a href="index_5.html">Home</a></li>
@@ -138,17 +149,27 @@
             <div id="main" class="span8 page image-preloader">
 
                 <div class="row-fluid">
-
-                    <h1>Login Fail</h1><br>
+                 <h1>Login Fail</h1><br>
 
                     <label>Username Or Password Was Wrong<br>Please Login Again !</label><br>
-                    <form action="Client" name="reloginform">
-                        Username :<input type="text" name="username" id="lgusername"/><br>
-                                    Password :<input type="password" name="password" id="lgpassword" /><br>
-                                    <input type="submit" name="action" value="Login" onclick="return validate();"/><br>
-                                    <input type="submit" name="action" value="Register A New Account"/><br>
+                    <form method="post" action="Client" name="loginform">
+                        <table style="margin-left: 5px">
+                                        <tr>
+                                            <td><input type="text" name="username" maxlength="20" placeholder="Username" id="lgusername"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="password" name="password" maxlength="20" placeholder="Password" id="lgpassword"/></td>
+                                        </tr>
+                                        <tr></tr>
+                                        <tr>
+                                            <td>
+                                                <input type="submit" name="action" value="Submit" class="btn btn-small" onclick="return validate();" />
+                                                <input type="submit" name="action" value="Register" class="btn btn-small" /><br>
+                                                <label><b><a href="recoverpassword.jsp">I Forgot My Password !</a></b></label>
+                                            </td>
+                                        </tr>
+                                    </table>
                     </form>
-
                 </div> <!-- End Row-Fluid -->
             </div> <!-- End Main -->
 

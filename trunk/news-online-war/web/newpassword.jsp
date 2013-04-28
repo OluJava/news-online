@@ -63,7 +63,36 @@
     <script type="text/javascript" src="js/eye.js"></script>
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/layout.js?ver=1.0.2"></script>
-   </head>
+    <script language="javascript">
+        function validate() {
+            if(document.recover.username.value  == '')
+            {
+                alert('Password Can Not Be Blank');
+                recover.username.focus();
+                return false;
+            }
+            if(document.recover.username.value.length  < 6 )
+            {
+                alert('Password Length Must Be At Least 6');
+                recover.username.focus();
+                return false;
+            }
+            if(document.recover.answer.value  == '')
+            {
+                alert('Confirm Password Can Not Be Blank');
+                recover.answer.focus();
+                return false;
+            }
+            if(document.recover.answer.value  != document.recover.username.value)
+            {
+                alert('Password And Confirm Password Are Not Match !');
+                recover.answer.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
 
 <body>
 
@@ -132,8 +161,23 @@
             <div id="main" class="span8 page image-preloader">
 
                 <div class="row-fluid">
-                 <%String m = (String)request.getAttribute("message");if(m!=null){%><label><b>${message}</b></label><br><%}%>
-                    <%String m1 = (String)request.getAttribute("message1");if(m1!=null){%><label><b>${message1}</b></label><br><%}%>
+                <form method="post" action="Client" name="recover">
+                        <table style="margin-left: 5px">
+                            <tr><td><label>New Password :</label></td>
+                                <td><input type="password" name="password" maxlength="20" value="" placeholder="Username" id="username"/></td>
+                            </tr>
+                            <tr>
+                                <td><label>Confirm New Password :</label></td>
+                                <td><input type="password" name="confirmpassword" maxlength="20" placeholder="Password" id="answer"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" name="action" value="Recover" class="btn btn-small" onclick="return validate();" />
+                                    <input type="button" onclick="history.go(-2);" value="Cancel" class="btn btn-small"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div> <!-- End Row-Fluid -->
             </div> <!-- End Main -->
 
