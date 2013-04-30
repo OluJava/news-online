@@ -152,7 +152,7 @@
 					</a>
 				    </td>
 				    <td align="center">
-					<a href="/news-online-war/Admin?action=removeFeedback&feedbackId=${item.feedbackId}">
+					<a onclick="return confirm('Are you sure you want to remove this feedback?')" href="/news-online-war/Admin?action=removeFeedback&feedbackId=${item.feedbackId}">
 					    <img src="admin/img/trash.png" alt="Remove Feedback"/>
 					</a>
 				    </td>

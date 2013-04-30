@@ -119,7 +119,7 @@
 			    return false;
 			}
 			else{
-			    if(trim(myform.cont.value).length<200){
+			    if(trim(CKEDITOR.instances.editor1.getData()).length<200){
 				alert("Content must be at least 200 words!");
 				return false;
 			    }
@@ -216,7 +216,7 @@
                     <h2>
                         Edit News</h2>
                     <div class="block ">
-                        <form name="myform" action="/news-online-war/Admin" onsubmit="return validate()" method="POST">
+                        <form name="myform" action="/news-online-war/Admin" method="POST">
                             <table class="form">
 				<tr>
 				    <td width="150px">
@@ -302,7 +302,9 @@
 				    <td></td>
 				    <td>
 					<div style="margin-top: 35px">
-					    <button type="submit" name="action" value="Save" class="btn-icon btn-grey btn-check"><span></span>Save News</button>
+					    <input type="hidden" name="newsId" value="${news.newsId}"/>
+					    <button type="submit" onclick="return validate()" name="action" value="Save" class="btn-icon btn-grey btn-check"><span></span>Save News</button>
+					    <button type="submit" name="action" value="resetEditNews" class="btn-icon btn-grey btn-refresh"><span></span>Reset</button>
 					</div>
 				    </td>
 				</tr>

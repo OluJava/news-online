@@ -114,7 +114,7 @@
 			return false;
 		    }
 		    else{
-			if(trim(myform.desc.value).length<50){
+			if(trim(CKEDITOR.instances.editor1.getData()).length<50){
 			    alert("Please check Description field!");
 			    return false;
 			}
@@ -210,7 +210,7 @@
                     <h2>
                         Edit News</h2>
                     <div class="block ">
-                        <form name="myform" action="/news-online-war/Admin" onsubmit="return validate()" method="POST">
+                        <form name="myform" action="/news-online-war/Admin" method="POST">
                             <table class="form">
 				<tr>
 				    <td width="150px">
@@ -268,7 +268,7 @@
 					    Description</label>
 				    </td>
 				    <td>
-					<textarea class="normal"  maxlength="255" id="desc" name="description" onblur="validateDesc()"></textarea>
+					<textarea class="normal"  maxlength="200" id="desc" name="description" onblur="validateDesc()"></textarea>
 				    </td>
 				    <td style="vertical-align: top; padding-top: 9px;"><span style="font-weight: bold" id="errDesc" class="error"></span></td>
 				</tr>
@@ -296,7 +296,8 @@
 				    <td></td>
 				    <td>
 					<div style="margin-top: 35px">
-					    <button type="submit" name="action" value="Publish" class="btn-icon btn-grey btn-check"><span></span>Publish</button>
+					    <button type="submit" onclick="return validate()" name="action" value="Publish" class="btn-icon btn-grey btn-check"><span></span>Publish</button>
+					    <button type="submit" name="action" value="resetInsertNews" class="btn-icon btn-grey btn-refresh"><span></span>Reset</button>
 					</div>
 				    </td>
 				</tr>

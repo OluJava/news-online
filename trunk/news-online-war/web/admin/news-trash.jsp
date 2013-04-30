@@ -148,7 +148,7 @@
 					</a>
 				    </td>
 				    <td align="center">
-					<a onclick="return confirm('Are you sure you want to delete this news')" href="/news-online-war/Admin?action=Delete&newsId=${item.newsId}">
+					<a onclick="return confirm('Are you sure you want to delete this news?')" href="/news-online-war/Admin?action=Delete&newsId=${item.newsId}">
 					    <img src="admin/img/cross.png" alt="Delete News"/>
 					</a>
 				    </td>
