@@ -49,6 +49,25 @@
 
                 setSidebarHeight();
             });
+	    function trim (str) {
+		str = str.replace(/^\s+/, '');
+		for (var i = str.length - 1; i >= 0; i--) {
+		    if (/\S/.test(str.charAt(i))) {
+			str = str.substring(0, i + 1);
+			break;
+		    }
+		}
+		return str;
+	    }
+	    function validate() {
+		if(trim(myform.title.value).length < 10){
+		    alert('Title must be at least 10 words!');
+		    return false;
+		}
+		else{
+		    return true;
+		}
+	    }
         </script>
     </head>
     <body>
@@ -130,7 +149,7 @@
                     <h2>
                         Insert Category</h2>
                     <div class="block ">
-                        <form action="/news-online-war/Admin?action=addCategory" method="POST">
+                        <form id="myform" action="/news-online-war/Admin" method="POST">
                             <table class="form">
 				<tr>
 				    <td width="150px">
@@ -138,7 +157,7 @@
 					    Title</label>
 				    </td>
 				    <td class="col2">
-					<input type="text" name="title" class="mini" maxlength="50"/>
+					<input type="text" id="title" name="title" class="mini" maxlength="50"/>
 				    </td>
 				</tr>
 				<tr>
@@ -147,7 +166,7 @@
 					    Parent</label>
 				    </td>
 				    <td>
-					<select style="margin-top: 20px" id="select" name="parent">
+					<select style="margin-top: 20px" id="parent" name="parent">
 					    <option value="None">None parent</option>
 					    <c:forEach items="${cateList}" var="item">
 						<option value="${item.categoryId}">${item.title}</option>
@@ -159,7 +178,8 @@
 				    <td></td>
 				    <td>
 					<div style="margin-top: 25px">
-					    <button class="btn-icon btn-grey btn-check"><span></span>Insert</button>
+					    <button type="submit" name="action" value="addCategory" onclick="return validate()" class="btn-icon btn-grey btn-check"><span></span>Insert</button>
+					    <button type="submit" name="action" value="category-add" class="btn-icon btn-grey btn-refresh"><span></span>Reset</button>
 					</div>
 				    </td>
 				</tr>
@@ -175,7 +195,7 @@
         </div>
         <div id="site_info">
             <p>
-                Copyright <a href="#">NewsOnline Admin</a>. All Rights Reserved.
+                Copyright <a href="/news-online-war/Admin">NewsOnline Admin</a>. All Rights Reserved.
             </p>
         </div>
     </body>

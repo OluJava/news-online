@@ -50,6 +50,25 @@
 
                 setSidebarHeight();
             });
+	    function trim (str) {
+		str = str.replace(/^\s+/, '');
+		for (var i = str.length - 1; i >= 0; i--) {
+		    if (/\S/.test(str.charAt(i))) {
+			str = str.substring(0, i + 1);
+			break;
+		    }
+		}
+		return str;
+	    }
+	    function validate() {
+		if(trim(myform.title.value).length < 10){
+		    alert('Title must be at least 10 words!');
+		    return false;
+		}
+		else{
+		    return true;
+		}
+	    }
         </script>
     </head>
     <body>
@@ -129,9 +148,9 @@
             <div class="grid_10">
                 <div class="box round first">
                     <h2>
-                        Insert Category</h2>
+                        Edit Category</h2>
                     <div class="block ">
-                        <form action="/news-online-war/Admin?action=editCategory&cateId=${category.categoryId}" method="POST">
+                        <form id="myform" action="/news-online-war/Admin" method="POST">
                             <table class="form">
 				<tr>
 				    <td width="150px">
@@ -139,7 +158,7 @@
 					    Title</label>
 				    </td>
 				    <td class="col2">
-					<input type="text" name="title" value="${category.title}" class="mini" maxlength="50"/>
+					<input id="title" type="text" name="title" value="${category.title}" class="mini" maxlength="50"/>
 				    </td>
 				</tr>
 				<tr>
@@ -148,7 +167,7 @@
 					    Parent</label>
 				    </td>
 				    <td>
-					<select style="margin-top: 20px" id="select" name="parent">
+					<select style="margin-top: 20px" id="parent" name="parent">
 					    <option value="None">None parent</option>
 					    <c:forEach items="${cateList}" var="item">
 						<c:set var="id">${item.categoryId}</c:set>
@@ -166,7 +185,9 @@
 				    <td></td>
 				    <td>
 					<div style="margin-top: 25px">
-					    <button class="btn-icon btn-grey btn-check"><span></span>Save</button>
+					    <input type="hidden" name="cateId" value="${category.categoryId}"/>
+					    <button type="submit" name="action" value="editCategory" onclick="return validate()" class="btn-icon btn-grey btn-check"><span></span>Save</button>
+					    <button type="submit" name="action" value="category-edit" class="btn-icon btn-grey btn-refresh"><span></span>Reset</button>
 					</div>
 				    </td>
 				</tr>

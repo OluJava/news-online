@@ -123,7 +123,7 @@
 	    <div class="grid_10">
 		<div class="box round first grid">
 		    <h2>
-			News List</h2>
+			${newsList[0].category.title} News</h2>
 		    <div class="block">
 
 			<table class="data display datatable" id="example">
@@ -152,7 +152,7 @@
 					</a>
 				    </td>
 				    <td align="center">
-					<a onclick="return confirm('Are you sure you want to remove this news')" href="/news-online-war/Admin?action=Remove&newsId=${item.newsId}">
+					<a onclick="return confirm('Are you sure you want to remove this news?')" href="/news-online-war/Admin?action=Remove&newsId=${item.newsId}">
 					    <img src="admin/img/trash.png" alt="Remove News"/>
 					</a>
 				    </td>

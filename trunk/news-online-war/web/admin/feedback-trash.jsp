@@ -150,7 +150,7 @@
 					</a>
 				    </td>
 				    <td align="center">
-					<a href="/news-online-war/Admin?action=deleteFeedback&feedbackId=${item.feedbackId}">
+					<a onclick="return confirm('Are you sure you want to delete this feedback?')" href="/news-online-war/Admin?action=deleteFeedback&feedbackId=${item.feedbackId}">
 					    <img src="admin/img/cross.png" alt="Delete Feedback"/>
 					</a>
 				    </td>

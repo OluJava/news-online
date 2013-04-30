@@ -153,7 +153,7 @@
 					</a>
 				    </td>
 				    <td align="center">
-					<a href="/news-online-war/Admin?action=deleteCategory&cateId=${item.categoryId}">
+					<a onclick="return confirm('Are you sure you want to delete this Category?')" href="/news-online-war/Admin?action=deleteCategory&cateId=${item.categoryId}">
 					    <img src="admin/img/cross.png" alt="Delete Categorys"/>
 					</a>
 				    </td>
