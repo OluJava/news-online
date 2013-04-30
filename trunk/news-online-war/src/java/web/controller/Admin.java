@@ -161,7 +161,7 @@ public class Admin extends HttpServlet {
 		ut.commit();
 	    }// </editor-fold>
 	    // <editor-fold defaultstate="collapsed" desc="News Add page">
-	    else if (sAction.equals("news-add")) {
+	    else if (sAction.equals("news-add") || sAction.equals("resetInsertNews")) {
 
 		ServletContext context = getServletContext();
 		List<String> list = new ArrayList<String>();
@@ -176,7 +176,7 @@ public class Admin extends HttpServlet {
 		request.getRequestDispatcher("admin/news-add.jsp").forward(request, response);
 	    }// </editor-fold>
 	    // <editor-fold defaultstate="collapsed" desc="News Edit page">
-	    else if (sAction.equals("news-edit")) {
+	    else if (sAction.equals("news-edit") || sAction.equals("resetEditNews")) {
 		int newsId = Integer.parseInt(request.getParameter("newsId"));
 		News news = newsSB.getNewsById(newsId);
 
@@ -297,7 +297,8 @@ public class Admin extends HttpServlet {
 		news.setStatus(Boolean.FALSE);
 		newsSB.update(news);
 		ut.begin();
-		Users cur_user = userSB.getUserById(1);
+		int userId = Integer.parseInt(session.getAttribute("userId").toString());
+		Users cur_user = userSB.getUserById(userId);
 		List<News> newsList = new ArrayList<News>();
 		for (News item : cur_user.getNewsCollection()) {
 		    if (item.getStatus()) {
@@ -489,10 +490,9 @@ public class Admin extends HttpServlet {
 		request.getRequestDispatcher("admin/feedback-list.jsp").forward(request, response);
 	    }// </editor-fold>
 	    // <editor-fold defaultstate="collapsed" desc="Feedback Edit page">
-	    else if (sAction.equals("feedback-edit")) {
+	    else if (sAction.equals("feedback-edit") || sAction.equals("resetFeedback")) {
 		int id = Integer.parseInt(request.getParameter("feedbackId"));
 		request.setAttribute("feedback", feedbackSB.getFeedbackById(id));
-		request.setAttribute("feedbackList", feedbackSB.getFeedbacksByStatus(true));
 		request.getRequestDispatcher("admin/feedback-edit.jsp").forward(request, response);
 	    }// </editor-fold>
 	    // <editor-fold defaultstate="collapsed" desc="Feedback trash page">
@@ -531,7 +531,7 @@ public class Admin extends HttpServlet {
 		request.setAttribute("feedbackList", feedbackSB.getFeedbacksByStatus(false));
 		request.getRequestDispatcher("admin/feedback-trash.jsp").forward(request, response);
 	    }// </editor-fold>
-	    // <editor-fold defaultstate="collapsed" desc="deleteFeedback">
+	    // <editor-fold defaultstate="collapsed" desc="Delete Feedback">
 	    else if (sAction.equals("deleteFeedback")) {
 		int id = Integer.parseInt(request.getParameter("feedbackId"));
 		Feedback f = feedbackSB.getFeedbackById(id);
